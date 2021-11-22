@@ -9,7 +9,7 @@
 <body>
 
 <center>
-<form action="servletMenu" method="post" style="border: 1px solid #000000; width: 350px; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F">
+<form action="servletLogin" method="post" style="border: 1px solid #000000; width: 350px; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F">
 
 	
 		<h3>Usuario:</h3>
@@ -23,6 +23,14 @@
 
 </form>	
 </center>
+
+<% 
+	if(request.getAttribute("mensaje")!=null){ %>
+	
+		<br><br>
+		<%=request.getAttribute("mensaje") %>
+	<%}
+%>
 
 </body>
 </html>

@@ -41,12 +41,6 @@ public class servletMenu extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getParameter("btnLoguear")!=null)
-		{
-			RequestDispatcher rd = request.getRequestDispatcher("Menú.jsp");
-			rd.forward(request, response);
-		}
-		
 		doGet(request, response);
 	}
 
