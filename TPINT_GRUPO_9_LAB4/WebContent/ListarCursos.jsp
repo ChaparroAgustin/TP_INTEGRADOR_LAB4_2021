@@ -96,6 +96,8 @@
 		
 </form>
 </center>
+<br>
+<label style="margin-left: 27%;">Usuario Logueado: <b><%=session.getAttribute("usuarioLogueado") %></b></label>
 
 </body>
 </html>

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/servletInternoCursos")
 public class servletInternoCursos extends HttpServlet {
@@ -27,6 +28,16 @@ public class servletInternoCursos extends HttpServlet {
 		if(request.getParameter("btnVolverCursos")!=null)
 		{
 			RequestDispatcher rd = request.getRequestDispatcher("ListarCursos.jsp");
+			rd.forward(request, response);
+		}
+		
+		if(request.getParameter("btnAgregarAlumnosCurso")!=null)
+		{
+			String codigoMateria = request.getParameter("selectMateria");
+			
+			request.getSession().setAttribute("codigoMateriaElegida", codigoMateria);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("Cursos.jsp");
 			rd.forward(request, response);
 		}
 	}

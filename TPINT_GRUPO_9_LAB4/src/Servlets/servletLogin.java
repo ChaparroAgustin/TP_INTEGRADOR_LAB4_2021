@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,7 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Entidades.Localidad;
+import Entidades.Nacionalidad;
+import Entidades.Provincia;
+import Negocio.LocalidadNegocio;
 import Negocio.LoginNegocio;
+import Negocio.NacionalidadNegocio;
+import Negocio.ProvinciaNegocio;
 
 @WebServlet("/servletLogin")
 public class servletLogin extends HttpServlet {
@@ -22,8 +29,8 @@ public class servletLogin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-		rd.forward(request, response);
+		//RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+		//rd.forward(request, response);
 		
 	}
 
@@ -32,6 +39,17 @@ public class servletLogin extends HttpServlet {
 		if(request.getParameter("btnLoguear")!=null)
 		{
 			LoginNegocio lneg = new LoginNegocio();
+			NacionalidadNegocio nacNeg = new NacionalidadNegocio();
+			ProvinciaNegocio provNeg = new ProvinciaNegocio();
+			LocalidadNegocio locNeg = new LocalidadNegocio();
+			
+			ArrayList<Nacionalidad> ListaNacionalidades = nacNeg.ListarNacionalidades();
+			ArrayList<Provincia> ListaProvincias = provNeg.ListarProvincias();
+			ArrayList<Localidad> ListaLocalidades = locNeg.ListarLocalidades();
+			
+			request.getSession().setAttribute("ListaNacionalidadesSession", ListaNacionalidades);
+			request.getSession().setAttribute("ListaProvinciasSession", ListaProvincias);
+			request.getSession().setAttribute("ListaLocalidadesSession", ListaLocalidades);
 			
 			int estado = 0;
 			String mensaje = null;
@@ -45,8 +63,12 @@ public class servletLogin extends HttpServlet {
 			{
 				String user = request.getParameter("txtUsuario");
 				String pass = request.getParameter("txtClave");
-			
+				
 				estado = lneg.comprobarLogin(user, pass);
+				
+				request.getSession().setAttribute("usuarioLogueado", user);
+				
+				
 			}
 			
 			if(estado == 1)

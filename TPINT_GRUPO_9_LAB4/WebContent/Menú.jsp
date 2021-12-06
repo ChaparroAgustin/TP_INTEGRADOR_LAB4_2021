@@ -18,11 +18,12 @@
 	<input type="submit" name="btnDocentes" value="Docentes" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 	<br><br>
 	<input type="submit" name="btnCursos" value="Cursos" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
-	<br>
+	<br><br><br>
+	<input type="submit" name="btnCerrarSesion" value="Cerrar sesión" Style="margin-left: 250px; border: 2px solid #000000; background-color: #e11e46; color: #FFFFFF; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 600; font-size: 13px; padding-top: 5px; padding-bottom: 5px; width: 103px;">
 </form>
 </center>
 <br>
-<label style="margin-left: 38%;">Usuario Logueado: Ejemplo</label>
+<label style="margin-left: 38%;">Usuario Logueado: <b><%=session.getAttribute("usuarioLogueado") %></b></label>
 	
 </body>
 </html>

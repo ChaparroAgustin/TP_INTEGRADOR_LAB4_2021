@@ -35,6 +35,11 @@ public class servletMenu extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("Cursos.jsp");
 			rd.forward(request, response);
 		}
+		if(request.getParameter("btnCerrarSesion")!=null)
+		{
+			RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+			rd.forward(request, response);
+		}
 		
 	}
 

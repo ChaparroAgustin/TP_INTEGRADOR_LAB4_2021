@@ -1,3 +1,6 @@
+<%@page import="Entidades.Provincia"%>
+<%@page import="Entidades.Nacionalidad"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -40,13 +43,39 @@
 				<td align="center">
 					<h5 style="margin-bottom: 2px;">Nacionalidad:</h5>
 					<select name="selectNacionalidad" style="width: 144px;">		
-						<%-- Inyectar código --%>		
+						<%
+							List<Nacionalidad> ListaNacionalidades = null;
+							if(session.getAttribute("ListaNacionalidadesSession")!=null)
+							{
+								ListaNacionalidades = (List<Nacionalidad>) session.getAttribute("ListaNacionalidadesSession");
+							}
+				
+	        				for(Nacionalidad n:ListaNacionalidades)
+	        				{%>
+	        					<option value="<%=n.getID() %>">
+	        						<%=n.getDescripcion() %>
+	        					</option>
+	        				<%} 
+	       				%>		
 					</select>
 				</td>
 				<td align="center">
 					<h5 style="margin-bottom: 2px;">Provincia:</h5>
 					<select name="selectProvincia" style="width: 144px;">	
-						<%-- Inyectar código --%>					
+						<%
+							List<Provincia> ListaProvincias = null;
+							if(session.getAttribute("ListaProvinciasSession")!=null)
+							{
+								ListaProvincias = (List<Provincia>) session.getAttribute("ListaProvinciasSession");
+							}
+				
+	        				for(Provincia p:ListaProvincias)
+	        				{%>
+	        					<option value="<%=p.getID() %>">
+	        						<%=p.getDescripcion() %>
+	        					</option>
+	        				<%} 
+	       				%>					
 					</select>
 				</td>
 			</tr>
@@ -69,6 +98,9 @@
 	
 </form>
 </center>
+
+<br>
+<label style="margin-left: 38%;">Usuario Logueado: <b><%=session.getAttribute("usuarioLogueado") %></b></label>
 
 </body>
 </html>

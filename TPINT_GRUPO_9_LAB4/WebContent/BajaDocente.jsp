@@ -38,6 +38,8 @@
 
 </form>
 </center>
+<br>
+<label style="margin-left: 38%;">Usuario Logueado: <b><%=session.getAttribute("usuarioLogueado") %></b></label>
 
 </body>
 </html>
