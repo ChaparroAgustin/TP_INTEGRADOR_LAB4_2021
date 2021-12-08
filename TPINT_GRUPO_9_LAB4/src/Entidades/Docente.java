@@ -10,7 +10,7 @@ public class Docente {
 	private String Apellido;
 	private String FechaNac;
 	private String Direccion;
-	private String Localidad;
+	private Localidad Localidad;
 	private Nacionalidad nacionalidad;
 	private String Email;
 	private String Telefono;
@@ -20,7 +20,7 @@ public class Docente {
 	}
 
 	public Docente(int codigo, String legajo, int dni, String nombre, String apellido, String fechaNac,
-			String direccion, String localidad, Nacionalidad nacionalidad, String email, String telefono) {
+			String direccion, Localidad localidad, Nacionalidad nacionalidad, String email, String telefono) {
 		super();
 		Codigo = codigo;
 		Legajo = legajo;
@@ -29,7 +29,7 @@ public class Docente {
 		Apellido = apellido;
 		FechaNac = fechaNac;
 		Direccion = direccion;
-		Localidad = localidad;
+		this.Localidad = localidad;
 		this.nacionalidad = nacionalidad;
 		Email = email;
 		Telefono = telefono;
@@ -91,12 +91,12 @@ public class Docente {
 		Direccion = direccion;
 	}
 
-	public String getLocalidad() {
+	public Localidad getLocalidad() {
 		return Localidad;
 	}
 
-	public void setLocalidad(String localidad) {
-		Localidad = localidad;
+	public void setLocalidad(Localidad localidad) {
+		this.Localidad = localidad;
 	}
 
 	public Nacionalidad getNacionalidad() {

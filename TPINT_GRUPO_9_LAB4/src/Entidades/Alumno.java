@@ -9,8 +9,8 @@ public class Alumno {
 	private String Apellido;
 	private String FechaNac;
 	private String Direccion;
-	private String Nacionalidad;
-	private String Provincia;
+	private Nacionalidad Nacionalidad;
+	private Provincia Provincia;
 	private String Email;
 	private int Telefono;
 	
@@ -19,7 +19,7 @@ public class Alumno {
 	}
 
 	public Alumno(int legajo, int dNI, String nombre, String apellido, String fechaNac, String direccion,
-			String nacionalidad, String provincia, String email, int telefono) {
+			Nacionalidad nacionalidad, Provincia provincia, String email, int telefono) {
 		super();
 		Legajo = legajo;
 		DNI = dNI;
@@ -27,8 +27,8 @@ public class Alumno {
 		Apellido = apellido;
 		FechaNac = fechaNac;
 		Direccion = direccion;
-		Nacionalidad = nacionalidad;
-		Provincia = provincia;
+		this.Nacionalidad = nacionalidad;
+		this.Provincia = provincia;
 		Email = email;
 		Telefono = telefono;
 	}
@@ -81,20 +81,20 @@ public class Alumno {
 		Direccion = direccion;
 	}
 
-	public String getNacionalidad() {
+	public Nacionalidad getNacionalidad() {
 		return Nacionalidad;
 	}
 
-	public void setNacionalidad(String nacionalidad) {
-		Nacionalidad = nacionalidad;
+	public void setNacionalidad(Nacionalidad nacionalidad) {
+		this.Nacionalidad = nacionalidad;
 	}
 
-	public String getProvincia() {
+	public Provincia getProvincia() {
 		return Provincia;
 	}
 
-	public void setProvincia(String provincia) {
-		Provincia = provincia;
+	public void setProvincia(Provincia provincia) {
+		this.Provincia = provincia;
 	}
 
 	public String getEmail() {

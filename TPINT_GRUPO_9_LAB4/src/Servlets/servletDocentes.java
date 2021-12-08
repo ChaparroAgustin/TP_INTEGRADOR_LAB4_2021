@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Entidades.Alumno;
+import Entidades.Docente;
+import Negocio.AlumnoNegocio;
+import Negocio.DocenteNegocio;
 
 @WebServlet("/servletDocentes")
 public class servletDocentes extends HttpServlet {
@@ -36,6 +42,11 @@ public class servletDocentes extends HttpServlet {
 		}
 		if(request.getParameter("btnListar")!=null)
 		{
+			DocenteNegocio docenteNeg = new DocenteNegocio();
+			ArrayList<Docente> Lista = docenteNeg.listarDocentes();
+
+			request.setAttribute("ListadoDocentes", Lista);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("ListarDocentes.jsp");
 			rd.forward(request, response);
 		}

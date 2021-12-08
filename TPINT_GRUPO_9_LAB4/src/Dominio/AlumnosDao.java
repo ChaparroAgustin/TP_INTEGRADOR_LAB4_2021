@@ -10,6 +10,8 @@ import java.util.*;
 
 import Conexion.Conexion;
 import Entidades.Alumno;
+import Entidades.Nacionalidad;
+import Entidades.Provincia;
 
 public class AlumnosDao {
 
@@ -20,6 +22,8 @@ public class AlumnosDao {
 		PreparedStatement st;
 		ResultSet rs;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
+		Nacionalidad nac = new Nacionalidad();
+		Provincia prov = new Provincia();
 		
 		String ListaAlumnos = "SELECT * FROM `vw-alumnos`;";
 		
@@ -37,8 +41,10 @@ public class AlumnosDao {
 				SimpleDateFormat format = new SimpleDateFormat("dd-LL-yyyy");
 				alumno.setFechaNac(format.format(rs.getDate("FechaNacAlumno")));
 				alumno.setDireccion(rs.getString("DireccionAlumno"));
-				alumno.setProvincia(rs.getString("ProvinciaAlumno"));
-				alumno.setNacionalidad(rs.getString("NacionalidadAlumno"));
+				prov.setDescripcion(rs.getString("ProvinciaAlumno"));
+				alumno.setProvincia(prov);
+				nac.setDescripcion(rs.getString("NacionalidadAlumno"));
+				alumno.setNacionalidad(nac);
 				alumno.setEmail(rs.getString("EmailAlumno"));
 				alumno.setTelefono(rs.getInt("TelefonoAlumno"));
 				
@@ -62,6 +68,8 @@ public class AlumnosDao {
 		PreparedStatement st;
 		ResultSet rs;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
+		Nacionalidad nac = new Nacionalidad();
+		Provincia prov = new Provincia();
 
 		String ListaFiltrada = "SELECT * FROM alumnos where concat_ws(LegajoAlumno, DniAlumno, NombreAlumno, ApellidoAlumno, FechaNacAlumno," 
 				+ "DireccionAlumno, ProvinciaAlumno, NacionalidadAlumno, EmailAlumno, TelefonoAlumno) like '%"+text+"%'";
@@ -78,8 +86,10 @@ public class AlumnosDao {
 				SimpleDateFormat format = new SimpleDateFormat("dd-LL-yyyy");
 				alumno.setFechaNac(format.format(rs.getDate("FechaNacAlumno")));
 				alumno.setDireccion(rs.getString("DireccionAlumno"));
-				alumno.setProvincia(rs.getString("ProvinciaAlumno"));
-				alumno.setNacionalidad(rs.getString("NacionalidadAlumno"));
+				prov.setDescripcion(rs.getString("ProvinciaAlumno"));
+				alumno.setProvincia(prov);
+				nac.setDescripcion(rs.getString("NacionalidadAlumno"));
+				alumno.setNacionalidad(nac);
 				alumno.setEmail(rs.getString("EmailAlumno"));
 				alumno.setTelefono(rs.getInt("TelefonoAlumno"));
 
