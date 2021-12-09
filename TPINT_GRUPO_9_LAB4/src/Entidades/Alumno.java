@@ -3,8 +3,8 @@ package Entidades;
 import java.util.*;
 
 public class Alumno {
-	private int Legajo;
-	private int DNI;
+	private String Legajo;
+	private String DNI;
 	private String Nombre;
 	private String Apellido;
 	private String FechaNac;
@@ -12,14 +12,14 @@ public class Alumno {
 	private Nacionalidad Nacionalidad;
 	private Provincia Provincia;
 	private String Email;
-	private int Telefono;
+	private String Telefono;
 	
 	public Alumno() {
 		
 	}
 
-	public Alumno(int legajo, int dNI, String nombre, String apellido, String fechaNac, String direccion,
-			Nacionalidad nacionalidad, Provincia provincia, String email, int telefono) {
+	public Alumno(String legajo, String dNI, String nombre, String apellido, String fechaNac, String direccion,
+			Nacionalidad nacionalidad, Provincia provincia, String email, String telefono) {
 		super();
 		Legajo = legajo;
 		DNI = dNI;
@@ -33,19 +33,19 @@ public class Alumno {
 		Telefono = telefono;
 	}
 
-	public int getLegajo() {
+	public String getLegajo() {
 		return Legajo;
 	}
 
-	public void setLegajo(int legajo) {
+	public void setLegajo(String legajo) {
 		Legajo = legajo;
 	}
 
-	public int getDNI() {
+	public String getDNI() {
 		return DNI;
 	}
 
-	public void setDNI(int dNI) {
+	public void setDNI(String dNI) {
 		DNI = dNI;
 	}
 
@@ -105,11 +105,11 @@ public class Alumno {
 		Email = email;
 	}
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return Telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		Telefono = telefono;
 	}
 

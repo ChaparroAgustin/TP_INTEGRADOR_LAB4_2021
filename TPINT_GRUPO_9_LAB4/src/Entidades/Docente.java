@@ -3,9 +3,8 @@ import Entidades.Nacionalidad;
 
 public class Docente {
 
-	private int Codigo;
 	private String Legajo;
-	private int Dni;	
+	private String Dni;	
 	private String Nombre;
 	private String Apellido;
 	private String FechaNac;
@@ -19,10 +18,9 @@ public class Docente {
 		
 	}
 
-	public Docente(int codigo, String legajo, int dni, String nombre, String apellido, String fechaNac,
+	public Docente(String legajo, String dni, String nombre, String apellido, String fechaNac,
 			String direccion, Localidad localidad, Nacionalidad nacionalidad, String email, String telefono) {
 		super();
-		Codigo = codigo;
 		Legajo = legajo;
 		Dni = dni;
 		Nombre = nombre;
@@ -35,14 +33,6 @@ public class Docente {
 		Telefono = telefono;
 	}
 
-	public int getCodigo() {
-		return Codigo;
-	}
-
-	public void setCodigo(int codigo) {
-		Codigo = codigo;
-	}
-
 	public String getLegajo() {
 		return Legajo;
 	}
@@ -51,11 +41,11 @@ public class Docente {
 		Legajo = legajo;
 	}
 
-	public int getDni() {
+	public String getDni() {
 		return Dni;
 	}
 
-	public void setDni(int dni) {
+	public void setDni(String dni) {
 		Dni = dni;
 	}
 
@@ -125,7 +115,7 @@ public class Docente {
 
 	@Override
 	public String toString() {
-		return "Docente [Codigo=" + Codigo + ", Legajo=" + Legajo + ", Dni=" + Dni + ", Nombre=" + Nombre
+		return "Docente [Legajo=" + Legajo + ", Dni=" + Dni + ", Nombre=" + Nombre
 				+ ", Apellido=" + Apellido + ", FechaNac=" + FechaNac + ", Direccion=" + Direccion + ", Localidad="
 				+ Localidad + ", Nacionalidad=" + nacionalidad + ", Email=" + Email + ", Telefono=" + Telefono + "]";
 	}

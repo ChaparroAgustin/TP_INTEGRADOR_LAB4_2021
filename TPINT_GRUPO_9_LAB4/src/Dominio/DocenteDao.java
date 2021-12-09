@@ -29,9 +29,8 @@ public class DocenteDao {
 			rs = st.executeQuery();
 			while(rs.next()) {
 				Docente d = new Docente();
-				d.setCodigo(rs.getInt("CodProfesor"));
 				d.setLegajo(rs.getString("LegajoProfesor"));
-				d.setDni(rs.getInt("DniProfesor"));
+				d.setDni(rs.getString("DniProfesor"));
 				d.setNombre(rs.getString("NombreProfesor"));
 				d.setApellido(rs.getString("ApellidoProfesor"));
 				SimpleDateFormat format = new SimpleDateFormat("dd-LL-yyyy");
@@ -73,9 +72,8 @@ public class DocenteDao {
 			rs = st.executeQuery();
 			while (rs.next()) {
 				Docente docente = new Docente();
-				docente.setCodigo(rs.getInt("CodProfesor"));
 				docente.setLegajo(rs.getString("LegajoProfesor"));
-				docente.setDni(rs.getInt("DniProfesor"));
+				docente.setDni(rs.getString("DniProfesor"));
 				docente.setNombre(rs.getString("NombreProfesor"));
 				docente.setApellido(rs.getString("ApellidoProfesor"));
 				SimpleDateFormat format = new SimpleDateFormat("dd-LL-yyyy");

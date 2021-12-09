@@ -6,13 +6,13 @@ import java.util.*;
 
 public class AlumnoNegocio {
 
-	AlumnosDao Adao = new AlumnosDao();
+	AlumnosDao aDao = new AlumnosDao();
 	
 	public ArrayList<Alumno> ListarAlumnos(){
 		
 		ArrayList<Alumno> Lista = null;
 		
-		Lista = Adao.obtenerAlumnos();
+		Lista = aDao.obtenerAlumnos();
 		
 		return Lista;
 	}
@@ -20,8 +20,17 @@ public class AlumnoNegocio {
 		
 		ArrayList<Alumno> Lista = null;
 		
-		Lista = Adao.filtrarAlumnos(text);
+		Lista = aDao.filtrarAlumnos(text);
 		
 		return Lista;
 	}
+	public int AgregarAlumno(Alumno a)
+	{
+		int estado = 0;
+		
+		estado = aDao.AgregarAlumno(a);
+		
+		return estado;
+	}
+	
 }
