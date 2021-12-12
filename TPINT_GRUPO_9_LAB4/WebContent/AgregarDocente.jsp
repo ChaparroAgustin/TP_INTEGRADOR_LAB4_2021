@@ -12,31 +12,44 @@
 <body>
 
 <center>
-<form action="servletInternoDocentes" method="get" style="border: 1px solid #000000; width: 350px; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F" >
+<form name="agregarDocente" action="servletInternoDocentes" method="get" style="border: 1px solid #000000; width: 350px; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F" >
 	
 	<h1><b>Agregar Docente</b></h1>
-	<h5 style="margin-bottom: 2px;">Legajo:</h5>
-	<input type="text" name="txtLegajo">
 	
 		<table>
 			<tr>
 				<td align="center">
+					<h5 style="margin-bottom: 2px;">Legajo:</h5>
+					<input type="text" name="txtLegajo" maxlength="10">
+				</td>
+				<td align="center">
 					<h5 style="margin-bottom: 2px;">DNI:</h5>
-					<input type="text" name="txtDni">
+					<input type="text" name="txtDni" maxlength="8">
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<h5 style="margin-bottom: 2px;">Nombres:</h5>
+					<input type="text" name="txtNombre" maxlength="50">
 				</td>	
 				<td align="center">
-					<h5 style="margin-bottom: 2px;">Nombre y Apellido:</h5>
-					<input type="text" name="txtNomApe">
+					<h5 style="margin-bottom: 2px;">Apellidos:</h5>
+					<input type="text" name="txtApellido" maxlength="50">
 				</td>		
 			</tr>
 			<tr>
 				<td align="center">
-					<h5 style="margin-bottom: 2px;">Fecha de Nacimiento:</h5>
-					<input type="text" name="txtNacimiento">
+					<h5 style="margin-bottom: 2px; font-size: 13px; font-weight: 600;">Nacimiento (dd/mm/aaaa):</h5>
+					
+					<input type="text" name="txtDiaNacimiento" maxlength="2" style="width: 20px; ">
+					&nbsp;&nbsp;/&nbsp;&nbsp;
+					<input type="text" name="txtMesNacimiento" maxlength="2" style="width: 20px; ">
+					&nbsp;&nbsp;/&nbsp;
+					<input type="text" name="txtAnioNacimiento" maxlength="4" style="width: 35px; ">
 				</td>
 				<td align="center">
 					<h5 style="margin-bottom: 2px;">Dirección:</h5>
-					<input type="text" name="txtDireccion">
+					<input type="text" name="txtDireccion" maxlength="100">
 				</td>
 			</tr>
 			<tr>
@@ -49,13 +62,16 @@
 							{
 								ListaLocalidades = (List<Localidad>) session.getAttribute("ListaLocalidadesSession");
 							}
-				
+							
+							if(session.getAttribute("ListaLocalidadesSession")!=null)
+							{
 	        				for(Localidad l:ListaLocalidades)
-	        				{%>
-	        					<option value="<%=l.getID() %>">
-	        						<%=l.getDescripcion() %>
-	        					</option>
-	        				<%} 
+	        					{%>
+	        						<option value="<%=l.getID() %>">
+	        							<%=l.getDescripcion() %>
+	        						</option>
+	        					<%}
+							}
 	       				%>		
 					</select>			
 				</td>
@@ -68,13 +84,16 @@
 							{
 								ListaNacionalidades = (List<Nacionalidad>) session.getAttribute("ListaNacionalidadesSession");
 							}
-				
-	        				for(Nacionalidad n:ListaNacionalidades)
-	        				{%>
-	        					<option value="<%=n.getID() %>">
-	        						<%=n.getDescripcion() %>
-	        					</option>
-	        				<%} 
+							
+							if(session.getAttribute("ListaNacionalidadesSession")!=null)
+							{
+	        					for(Nacionalidad n:ListaNacionalidades)
+	        					{%>
+	        						<option value="<%=n.getID() %>">
+	        							<%=n.getDescripcion() %>
+	        						</option>
+	        					<%}
+							}
 	       				%>		
 					</select>
 				</td>
@@ -82,15 +101,34 @@
 			<tr>
 				<td align="center">
 					<h5 style="margin-bottom: 2px;">Email:</h5>
-					<input type="text" name="txtEmail">
+					<input type="text" name="txtEmail" maxlength="100">
 				</td>
 				<td align="center">
 					<h5 style="margin-bottom: 2px;">Teléfono:</h5>
-					<input type="text" name="txtTelefono">
+					<input type="text" name="txtTelefono" maxlength="10">
 				</td>
 			</tr>
 		</table>	
 		<br>
+			<center>
+				<% 
+					if(request.getAttribute("mensajeAgregarDocente")!=null){ 
+						if(request.getAttribute("mensajeAgregarDocente")=="Docente agregado correctamente.")
+						{%>
+							<label Style="color: darkgreen; box-shadow: 0px 0px 10px 0px #000000; padding: 4px; background-color: #ffffff; border-radius: 15px;">
+								<b><%=request.getAttribute("mensajeAgregarDocente") %></b>
+							</label>
+						<%} 
+						else
+						{%>
+							<label Style="color: red; box-shadow: 0px 0px 10px 0px #000000; padding: 4px; background-color: #ffffff; border-radius: 15px;">
+								<b><%=request.getAttribute("mensajeAgregarDocente") %></b>
+							</label>
+						<%} %>
+						
+					<%}
+				%>
+			</center>
 		<br>
 		<input type="submit" name="btnAlta" value="Agregar" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 		<br><br><br>
@@ -100,6 +138,36 @@
 </center>
 <br>
 <label style="margin-left: 38%;">Usuario Logueado: <b><%=session.getAttribute("usuarioLogueado") %></b></label>
+
+<script>
+window.addEventListener("load", function() {
+  agregarDocente.txtLegajo.addEventListener("keypress", soloNumeros, false);
+  agregarDocente.txtDni.addEventListener("keypress", soloNumeros, false);
+  agregarDocente.txtDiaNacimiento.addEventListener("keypress", soloNumeros, false);
+  agregarDocente.txtMesNacimiento.addEventListener("keypress", soloNumeros, false);
+  agregarDocente.txtAnioNacimiento.addEventListener("keypress", soloNumeros, false);
+  agregarDocente.txtTelefono.addEventListener("keypress", soloNumeros, false);
+  agregarDocente.txtNombre.addEventListener("keypress", soloLetras, false);
+  agregarDocente.txtApellido.addEventListener("keypress", soloLetras, false);
+});
+
+function soloNumeros(e){
+  var key = window.event ? e.which : e.keyCode;
+  if (key < 48 || key > 57) {
+    e.preventDefault();
+  }
+}
+
+function soloLetras(e) {
+    var key = window.event ? e.which : e.keyCode;
+    if (key >= 48 && key <= 57) 
+    {
+    	e.preventDefault();
+    	return false; 
+    }
+    return true;
+}
+</script>
 
 </body>
 </html>

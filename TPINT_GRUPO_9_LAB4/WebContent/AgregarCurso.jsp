@@ -76,7 +76,7 @@
 				
 	        				for(Docente d:listaDocentes)
 	        				{%>
-	        					<option value="<%=d.getCodigo() %>">
+	        					<option value="<%=d.getId() %>">
 	        						<%=d.getNombre() %>&nbsp;<%=d.getApellido() %>
 	        					</option>
 	        				<%} 

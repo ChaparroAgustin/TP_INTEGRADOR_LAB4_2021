@@ -46,19 +46,19 @@ CREATE TABLE alumnos (
   Apellido varchar(50) not null,
   FechaNac date not null,
   Direccion varchar(100) not null,
-  Provincia varchar(50) not null,
-  Nacionalidad varchar(50) not null,
+  Provincia int not null,
+  Nacionalidad int not null,
   Email varchar(100) unique not null,
   Telefono varchar(50) not null,
   Estado bit not null default 1,
-  CONSTRAINT FK_Nacionalidad FOREIGN KEY (Nacionalidad) REFERENCES Nacionalidades (Descripcion),
-  CONSTRAINT FK_Provincia FOREIGN KEY (Provincia) REFERENCES Provincias (Descripcion)
+  CONSTRAINT FK_Nacionalidad2 FOREIGN KEY (Nacionalidad) REFERENCES Nacionalidades (ID),
+  CONSTRAINT FK_Provincia FOREIGN KEY (Provincia) REFERENCES Provincias (ID)
 );
 
 INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
-VALUES('2222','87654321','Pepa','Merengada','1992-03-10','calle verdadera 123','Buenos Aires','Argentina','pepa_merenga@yahoo.com.ar','87654321');
+VALUES('2222','87654321','Pepa','Merengada','1992-03-10','calle verdadera 123',1,1,'pepa_merenga@yahoo.com.ar','87654321');
 INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
-VALUES('1111','12345678','Pepito','Oreo','1990-03-10','calle falsa 123','Montevideo','Uruguay','pepito_oreo@yahoo.com.ar','12345678');
+VALUES('1111','12345678','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo@yahoo.com.ar','12345678');
 
 CREATE TABLE alumnosxcurso (
   ID int primary key not null auto_increment,
@@ -98,19 +98,19 @@ CREATE TABLE docentes (
   Apellido varchar(50) not null,
   FechaNac date not null,
   Direccion varchar(100) not null,
-  Localidad varchar(50) not null,
-  Nacionalidad varchar(50) not null,
+  Localidad int not null,
+  Nacionalidad int not null,
   Email varchar(100) not null,
   Telefono varchar(50) not null,
   Estado bit not null default(1),
-  CONSTRAINT FK_Nacionalidad2 FOREIGN KEY (Nacionalidad) REFERENCES Nacionalidades (Descripcion),
-  CONSTRAINT FK_Localidad FOREIGN KEY (Localidad) REFERENCES Localidades (Descripcion)
+  CONSTRAINT FK_Nacionalidad FOREIGN KEY (Nacionalidad) REFERENCES Nacionalidades (ID),
+  CONSTRAINT FK_Localidad FOREIGN KEY (Localidad) REFERENCES Localidades (ID)
 );
 
 INSERT INTO docentes(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Localidad, Nacionalidad, Email, Telefono)
-VALUES ('1234','12345678','martita','maestra','1990-03-10','Rosario 1234','Tigre','Argentina','martita123@yahoo.com.ar','12345678');
+VALUES ('1234','12345678','martita','maestra','1990-03-10','Rosario 1234',2,1,'martita123@yahoo.com.ar','12345678');
 INSERT INTO docentes(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Localidad, Nacionalidad, Email, Telefono)
-VALUES ('4321','87654321','pedrito','maestrito','1992-03-10','Newells 4321','CABA','Argentina','pedrito123@yahoo.com.ar','87654321');
+VALUES ('4321','87654321','pedrito','maestrito','1992-03-10','Newells 4321',5,1,'pedrito123@yahoo.com.ar','87654321');
 
 CREATE TABLE tiposusuario (
   ID int primary key not null auto_increment,
@@ -143,11 +143,17 @@ alumnos.Nombre AS Nombre,
 alumnos.Apellido AS Apellido,
 alumnos.FechaNac AS FechaNac,
 alumnos.Direccion AS Direccion,
-alumnos.Provincia AS Provincia,
-alumnos.Nacionalidad AS Nacionalidad,
+(select Provincias.Descripcion from Provincias where Provincias.ID = alumnos.Provincia) AS Provincia,
+(select Nacionalidades.Descripcion from Nacionalidades where Nacionalidades.ID = alumnos.Nacionalidad) AS Nacionalidad,
 alumnos.Email AS Email,
-alumnos.Telefono AS Telefono 
+alumnos.Telefono AS Telefono, 
+alumnos.Estado AS Estado
 from alumnos;
+
+select * from alumnos;
+
+insert into tpintegrador.alumnos (Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
+values ('4444', '38346656', 'Juan Manuel', 'Gross', date_format('03-06-1994', "%d-%m-%Y"), 'Simon 2005', 1, 1, 'jmgross76@gmail.com', '1156073553');
 
 CREATE VIEW `vw-listar-docentes`
 AS
@@ -158,8 +164,9 @@ docentes.Nombre AS Nombre,
 docentes.Apellido AS Apellido,
 docentes.FechaNac AS FechaNac,
 docentes.Direccion AS Direccion,
-docentes.Localidad AS Localidad,
-docentes.Nacionalidad AS Nacionalidad,
+(select Localidades.Descripcion from Localidades where Localidades.ID = docentes.Localidad) AS Localidad,
+(select Nacionalidades.Descripcion from Nacionalidades where Nacionalidades.ID = docentes.Nacionalidad) AS Nacionalidad,
 docentes.Email AS Email,
-docentes.Telefono AS Telefono
+docentes.Telefono AS Telefono,
+docentes.Estado AS Estado
 from docentes;

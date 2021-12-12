@@ -18,11 +18,11 @@ public class Alumno {
 		
 	}
 
-	public Alumno(String legajo, String dNI, String nombre, String apellido, String fechaNac, String direccion,
+	public Alumno(String legajo, String dni, String nombre, String apellido, String fechaNac, String direccion,
 			Nacionalidad nacionalidad, Provincia provincia, String email, String telefono) {
 		super();
 		Legajo = legajo;
-		DNI = dNI;
+		DNI = dni;
 		Nombre = nombre;
 		Apellido = apellido;
 		FechaNac = fechaNac;
@@ -45,8 +45,8 @@ public class Alumno {
 		return DNI;
 	}
 
-	public void setDNI(String dNI) {
-		DNI = dNI;
+	public void setDNI(String dni) {
+		DNI = dni;
 	}
 
 	public String getNombre() {

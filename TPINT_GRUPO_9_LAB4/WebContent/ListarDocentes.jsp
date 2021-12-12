@@ -26,13 +26,13 @@
 	}
 		
 	%>
-	<table border="1">
+	<table border="1" border-color="black">
     <thead>
-        <tr>
+        <tr style="background-color: #002060; color: #ffffff; text-shadow: #808080 1.5px 1px; padding: 1px;">
             <th>Legajo</th>
             <th>DNI</th>
-            <th>Nom. y Ape.</th>
-            <th>Fec. Nacimiento</th>
+            <th>Nombres y Apellidos</th>
+            <th>Fecha Nacimiento</th>
             <th>Dirección</th>
             <th>Localidad</th>
             <th>Nacionalidad</th>
@@ -43,7 +43,7 @@
     <tbody>    	
 		<%if(Lista!=null)
     		for(Docente docente : Lista){%>
-		<tr>  
+		<tr style="background-color: LightBlue; color: Black;">  
 		    <td align="center"><%=docente.getLegajo() %></td>
 		    <td align="center"><%=docente.getDni() %></td>
 		    <td align="center"><%=docente.getNombre() + " " + docente.getApellido()%></td>

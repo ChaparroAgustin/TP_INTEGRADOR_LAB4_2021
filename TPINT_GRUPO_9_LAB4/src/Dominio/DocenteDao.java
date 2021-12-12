@@ -1,5 +1,6 @@
 package Dominio;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import Entidades.Nacionalidad;
 import java.sql.PreparedStatement;
@@ -29,20 +30,20 @@ public class DocenteDao {
 			rs = st.executeQuery();
 			while(rs.next()) {
 				Docente d = new Docente();
-				d.setLegajo(rs.getString("LegajoProfesor"));
-				d.setDni(rs.getString("DniProfesor"));
-				d.setNombre(rs.getString("NombreProfesor"));
-				d.setApellido(rs.getString("ApellidoProfesor"));
+				d.setId(rs.getInt("ID"));
+				d.setLegajo(rs.getString("Legajo"));
+				d.setDni(rs.getString("Dni"));
+				d.setNombre(rs.getString("Nombre"));
+				d.setApellido(rs.getString("Apellido"));
 				SimpleDateFormat format = new SimpleDateFormat("dd-LL-yyyy");
-				d.setFechaNac(format.format(rs.getDate("FechaNacProfesor")));
-				d.setFechaNac(rs.getString("FechaNacProfesor"));
-				d.setDireccion(rs.getString("DireccionProfesor"));
-				loc.setDescripcion(rs.getString("LocalidadProfesor"));
+				d.setFechaNac(format.format(rs.getDate("FechaNac")));
+				d.setDireccion(rs.getString("Direccion"));
+				loc.setDescripcion(rs.getString("Localidad"));
 				d.setLocalidad(loc);
-				nac.setDescripcion(rs.getString("NacionalidadProfesor"));
+				nac.setDescripcion(rs.getString("Nacionalidad"));
 				d.setNacionalidad(nac);
-				d.setEmail(rs.getString("EmailProfesor"));
-				d.setTelefono(rs.getString("TelefonoProfesor"));
+				d.setEmail(rs.getString("Email"));
+				d.setTelefono(rs.getString("Telefono"));
 				Lista.add(d);
 			}
 		
@@ -63,28 +64,27 @@ public class DocenteDao {
 		Nacionalidad nac = new Nacionalidad();
 		Localidad loc = new Localidad();
 
-		String ListaFiltrada = "SELECT * FROM profesores where concat_ws(CodProfesor, LegajoProfesor, DniProfesor, NombreProfesor, "
-				+ "ApellidoProfesor, FechaNacProfesor, DireccionProfesor, LocalidadProfesor, NacionalidadProfesor, EmailProfesor, "
-				+ "TelefonoProfesor) like '%"+text+"%'";
+		String ListaFiltrada = "SELECT * FROM docentes where concat_ws(Legajo, Dni, Nombre, Apellido, "
+				+ "FechaNac, Direccion, Localidad, Nacionalidad, Email, Telefono) like '%"+text+"%'";
 		
 		try {
 			st = conexion.prepareStatement(ListaFiltrada);
 			rs = st.executeQuery();
 			while (rs.next()) {
 				Docente docente = new Docente();
-				docente.setLegajo(rs.getString("LegajoProfesor"));
-				docente.setDni(rs.getString("DniProfesor"));
-				docente.setNombre(rs.getString("NombreProfesor"));
-				docente.setApellido(rs.getString("ApellidoProfesor"));
+				docente.setLegajo(rs.getString("Legajo"));
+				docente.setDni(rs.getString("Dni"));
+				docente.setNombre(rs.getString("Nombre"));
+				docente.setApellido(rs.getString("Apellido"));
 				SimpleDateFormat format = new SimpleDateFormat("dd-LL-yyyy");
-				docente.setFechaNac(format.format(rs.getDate("FechaNacProfesor")));
-				docente.setDireccion(rs.getString("DireccionProfesor"));
-				loc.setDescripcion(rs.getString("LocalidadProfesor"));
+				docente.setFechaNac(format.format(rs.getDate("FechaNac")));
+				docente.setDireccion(rs.getString("Direccion"));
+				loc.setDescripcion(rs.getString("Localidad"));
 				docente.setLocalidad(loc);
-				nac.setDescripcion(rs.getString("NacionalidadProfesor"));
+				nac.setDescripcion(rs.getString("Nacionalidad"));
 				docente.setNacionalidad(nac);
-				docente.setEmail(rs.getString("EmailProfesor"));
-				docente.setTelefono(rs.getString("TelefonoProfesor"));
+				docente.setEmail(rs.getString("Email"));
+				docente.setTelefono(rs.getString("Telefono"));
 
 				Lista.add(docente);
 
@@ -96,6 +96,42 @@ public class DocenteDao {
 		}
 		return Lista;
 
+	}
+	
+	public int AgregarDocente(Docente d)
+	{
+		int estado = 0;
+		
+		CallableStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try
+		{
+			statement = conexion.prepareCall("insert into tpintegrador.docentes (Legajo, Dni, Nombre, "
+					+ "Apellido, FechaNac, Direccion, Localidad, Nacionalidad, Email, Telefono)"
+					+ "values('"
+					+ d.getLegajo() + "', '"
+					+ d.getDni() + "', '"
+					+ d.getNombre() + "', '"
+					+ d.getApellido() + "', '"
+					+ d.getFechaNac() + "', '"
+					+ d.getDireccion() + "', '"
+					+ d.getLocalidad().getID() + "', '"
+					+ d.getNacionalidad().getID() + "', '"
+					+ d.getEmail() + "', '"
+					+ d.getTelefono()
+					+ "')");
+			
+			
+			statement.execute();
+			
+			estado = 1;
+			
+		}
+		catch (SQLException e) 
+		{											
+			estado = -1;
+		}
+		return estado;
 	}
 	
 }

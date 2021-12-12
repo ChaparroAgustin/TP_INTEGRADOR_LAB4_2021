@@ -26,9 +26,9 @@ pageEncoding="ISO-8859-1"%>
 	}
 		
 	%>
-	<table border="1">
+	<table border="1" border-color="black">
     <thead>
-        <tr>
+        <tr style="background-color: #002060; color: #ffffff; text-shadow: #808080 1.5px 1px; padding: 1px;">
             <th>Legajo</th>
             <th>DNI</th>
             <th>Nom. y Ape.</th>
@@ -43,7 +43,7 @@ pageEncoding="ISO-8859-1"%>
     <tbody>  
     <%if(Lista!=null)
     		for(Alumno alumno : Lista){%>
-		<tr>  
+		<tr style="background-color: LightBlue; color: Black;"> 
 		    <td align="center"><%=alumno.getLegajo() %></td>
 		    <td align="center"><%=alumno.getDNI() %></td>
 		    <td align="center"><%=alumno.getNombre() + " " + alumno.getApellido()%></td>

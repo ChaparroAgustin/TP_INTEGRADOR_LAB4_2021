@@ -1,10 +1,13 @@
 package Dominio;
 
 import java.sql.CallableStatement;
+import java.sql.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.*;
@@ -113,20 +116,21 @@ public class AlumnosDao {
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		try
 		{
-			statement = conexion.prepareCall("insert into alumnos (Legajo, Dni, Nombre, "
-					+ "Apellido, FechaNac, Direccion, Provincia, Nacionalidad, "
-					+ "Email, Telefono)"
-					+ "values(?,?,?,?,?,?,?,?,?,?)");
-			statement.setString(1, a.getLegajo());
-			statement.setString(2, a.getDNI());
-			statement.setString(3, a.getNombre());
-			statement.setString(4, a.getApellido());
-			statement.setString(5, a.getFechaNac());
-			statement.setString(6, a.getDireccion());
-			statement.setString(7, a.getProvincia().getDescripcion());
-			statement.setString(8, a.getNacionalidad().getDescripcion());
-			statement.setString(9, a.getEmail());
-			statement.setString(10, a.getTelefono());
+			statement = conexion.prepareCall("insert into tpintegrador.alumnos (Legajo, Dni, Nombre, "
+					+ "Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)"
+					+ "values('"
+					+ a.getLegajo() + "', '"
+					+ a.getDNI() + "', '"
+					+ a.getNombre() + "', '"
+					+ a.getApellido() + "', '"
+					+ a.getFechaNac() + "', '"
+					+ a.getDireccion() + "', '"
+					+ a.getProvincia().getID() + "', '"
+					+ a.getNacionalidad().getID() + "', '"
+					+ a.getEmail() + "', '"
+					+ a.getTelefono()
+					+ "')");
+			
 			
 			statement.execute();
 			
@@ -135,19 +139,8 @@ public class AlumnosDao {
 		}
 		catch (SQLException e) 
 		{											
-			if(e.getErrorCode() == 1062) { //Duplicados
-				estado = -1;
-			} else {
-				e.printStackTrace();
-				try {
-					conexion.rollback();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				estado = -2;		
-			}
+			estado = -1;
 		}
-		
 		return estado;
 	}
 	

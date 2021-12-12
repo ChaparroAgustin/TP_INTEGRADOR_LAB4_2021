@@ -3,6 +3,7 @@ import Entidades.Nacionalidad;
 
 public class Docente {
 
+	private int ID;
 	private String Legajo;
 	private String Dni;	
 	private String Nombre;
@@ -18,9 +19,10 @@ public class Docente {
 		
 	}
 
-	public Docente(String legajo, String dni, String nombre, String apellido, String fechaNac,
+	public Docente(int id, String legajo, String dni, String nombre, String apellido, String fechaNac,
 			String direccion, Localidad localidad, Nacionalidad nacionalidad, String email, String telefono) {
 		super();
+		ID = id;
 		Legajo = legajo;
 		Dni = dni;
 		Nombre = nombre;
@@ -33,6 +35,14 @@ public class Docente {
 		Telefono = telefono;
 	}
 
+	public int getId() {
+		return ID;
+	}
+	
+	public void setId(int id) {
+		ID = id;
+	}
+	
 	public String getLegajo() {
 		return Legajo;
 	}
@@ -115,7 +125,7 @@ public class Docente {
 
 	@Override
 	public String toString() {
-		return "Docente [Legajo=" + Legajo + ", Dni=" + Dni + ", Nombre=" + Nombre
+		return "Docente [ID=" + ID + ", Legajo=" + Legajo + ", Dni=" + Dni + ", Nombre=" + Nombre
 				+ ", Apellido=" + Apellido + ", FechaNac=" + FechaNac + ", Direccion=" + Direccion + ", Localidad="
 				+ Localidad + ", Nacionalidad=" + nacionalidad + ", Email=" + Email + ", Telefono=" + Telefono + "]";
 	}
