@@ -3,11 +3,16 @@ package Entidades;
 import java.util.*;
 
 public class Alumno {
+	
+	private int ID;
 	private String Legajo;
 	private String DNI;
 	private String Nombre;
 	private String Apellido;
 	private String FechaNac;
+	private int DiaNac;
+	private int MesNac;
+	private int AnioNac;
 	private String Direccion;
 	private Nacionalidad Nacionalidad;
 	private Provincia Provincia;
@@ -18,21 +23,34 @@ public class Alumno {
 		
 	}
 
-	public Alumno(String legajo, String dni, String nombre, String apellido, String fechaNac, String direccion,
-			Nacionalidad nacionalidad, Provincia provincia, String email, String telefono) {
+	public Alumno(int id, String legajo, String dNI, String nombre, String apellido, String fechaNac, int diaNac,
+			int mesNac, int anioNac, String direccion, Entidades.Nacionalidad nacionalidad,
+			Entidades.Provincia provincia, String email, String telefono) {
 		super();
+		ID = id;
 		Legajo = legajo;
-		DNI = dni;
+		DNI = dNI;
 		Nombre = nombre;
 		Apellido = apellido;
 		FechaNac = fechaNac;
+		DiaNac = diaNac;
+		MesNac = mesNac;
+		AnioNac = anioNac;
 		Direccion = direccion;
-		this.Nacionalidad = nacionalidad;
-		this.Provincia = provincia;
+		Nacionalidad = nacionalidad;
+		Provincia = provincia;
 		Email = email;
 		Telefono = telefono;
 	}
 
+	public int getID() {
+		return ID;
+	}
+	
+	public void setID(int id) {
+		ID = id;
+	}
+	
 	public String getLegajo() {
 		return Legajo;
 	}
@@ -45,8 +63,8 @@ public class Alumno {
 		return DNI;
 	}
 
-	public void setDNI(String dni) {
-		DNI = dni;
+	public void setDNI(String dNI) {
+		DNI = dNI;
 	}
 
 	public String getNombre() {
@@ -73,6 +91,30 @@ public class Alumno {
 		FechaNac = fechaNac;
 	}
 
+	public int getDiaNac() {
+		return DiaNac;
+	}
+
+	public void setDiaNac(int diaNac) {
+		DiaNac = diaNac;
+	}
+
+	public int getMesNac() {
+		return MesNac;
+	}
+
+	public void setMesNac(int mesNac) {
+		MesNac = mesNac;
+	}
+
+	public int getAnioNac() {
+		return AnioNac;
+	}
+
+	public void setAnioNac(int anioNac) {
+		AnioNac = anioNac;
+	}
+
 	public String getDireccion() {
 		return Direccion;
 	}
@@ -86,7 +128,7 @@ public class Alumno {
 	}
 
 	public void setNacionalidad(Nacionalidad nacionalidad) {
-		this.Nacionalidad = nacionalidad;
+		Nacionalidad = nacionalidad;
 	}
 
 	public Provincia getProvincia() {
@@ -94,7 +136,7 @@ public class Alumno {
 	}
 
 	public void setProvincia(Provincia provincia) {
-		this.Provincia = provincia;
+		Provincia = provincia;
 	}
 
 	public String getEmail() {
@@ -115,12 +157,11 @@ public class Alumno {
 
 	@Override
 	public String toString() {
-		return "Alumno [Legajo=" + Legajo + ", DNI=" + DNI + ", Nombre=" + Nombre + ", Apellido=" + Apellido
-				+ ", FechaNac=" + FechaNac + ", Direccion=" + Direccion + ", Nacionalidad=" + Nacionalidad
-				+ ", Provincia=" + Provincia + ", Email=" + Email + ", Telefono=" + Telefono + "]";
+		return "Alumno [ID=" + ID + ", Legajo=" + Legajo + ", DNI=" + DNI + ", Nombre=" + Nombre + ", Apellido=" + Apellido
+				+ ", FechaNac=" + FechaNac + ", DiaNac=" + DiaNac + ", MesNac=" + MesNac + ", AnioNac=" + AnioNac
+				+ ", Direccion=" + Direccion + ", Nacionalidad=" + Nacionalidad + ", Provincia=" + Provincia
+				+ ", Email=" + Email + ", Telefono=" + Telefono + "]";
 	}
-	
-	
-	
+
 	
 }

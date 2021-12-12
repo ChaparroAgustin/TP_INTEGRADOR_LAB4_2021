@@ -39,17 +39,6 @@ public class servletLogin extends HttpServlet {
 		if(request.getParameter("btnLoguear")!=null)
 		{
 			LoginNegocio lneg = new LoginNegocio();
-			NacionalidadNegocio nacNeg = new NacionalidadNegocio();
-			ProvinciaNegocio provNeg = new ProvinciaNegocio();
-			LocalidadNegocio locNeg = new LocalidadNegocio();
-			
-			ArrayList<Nacionalidad> ListaNacionalidades = nacNeg.ListarNacionalidades();
-			ArrayList<Provincia> ListaProvincias = provNeg.ListarProvincias();
-			ArrayList<Localidad> ListaLocalidades = locNeg.ListarLocalidades();
-			
-			request.getSession().setAttribute("ListaNacionalidadesSession", ListaNacionalidades);
-			request.getSession().setAttribute("ListaProvinciasSession", ListaProvincias);
-			request.getSession().setAttribute("ListaLocalidadesSession", ListaLocalidades);
 			
 			int estado = 0;
 			String mensaje = null;
@@ -67,8 +56,6 @@ public class servletLogin extends HttpServlet {
 				estado = lneg.comprobarLogin(user, pass);
 				
 				request.getSession().setAttribute("usuarioLogueado", user);
-				
-				
 			}
 			
 			if(estado == 1)
@@ -80,11 +67,17 @@ public class servletLogin extends HttpServlet {
 			{
 				mensaje = "Faltan completar campos.";
 				request.setAttribute("mensaje", mensaje);
+				
+				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+				rd.forward(request, response);
 			}
 			else
 			{
 				mensaje = "Credenciales inexistentes o inválidas.";
 				request.setAttribute("mensaje", mensaje);
+				
+				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+				rd.forward(request, response);
 			}
 		}
 		

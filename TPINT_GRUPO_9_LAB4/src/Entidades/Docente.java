@@ -9,6 +9,9 @@ public class Docente {
 	private String Nombre;
 	private String Apellido;
 	private String FechaNac;
+	private int DiaNac;
+	private int MesNac;
+	private int AnioNac;
 	private String Direccion;
 	private Localidad Localidad;
 	private Nacionalidad nacionalidad;
@@ -19,15 +22,19 @@ public class Docente {
 		
 	}
 
-	public Docente(int id, String legajo, String dni, String nombre, String apellido, String fechaNac,
-			String direccion, Localidad localidad, Nacionalidad nacionalidad, String email, String telefono) {
+	public Docente(int iD, String legajo, String dni, String nombre, String apellido, String fechaNac, int diaNac,
+			int mesNac, int anioNac, String direccion, Entidades.Localidad localidad, Nacionalidad nacionalidad,
+			String email, String telefono) {
 		super();
-		ID = id;
+		ID = iD;
 		Legajo = legajo;
 		Dni = dni;
 		Nombre = nombre;
 		Apellido = apellido;
 		FechaNac = fechaNac;
+		DiaNac = diaNac;
+		MesNac = mesNac;
+		AnioNac = anioNac;
 		Direccion = direccion;
 		this.Localidad = localidad;
 		this.nacionalidad = nacionalidad;
@@ -35,14 +42,14 @@ public class Docente {
 		Telefono = telefono;
 	}
 
-	public int getId() {
+	public int getID() {
 		return ID;
 	}
-	
-	public void setId(int id) {
-		ID = id;
+
+	public void setID(int iD) {
+		ID = iD;
 	}
-	
+
 	public String getLegajo() {
 		return Legajo;
 	}
@@ -81,6 +88,30 @@ public class Docente {
 
 	public void setFechaNac(String fechaNac) {
 		FechaNac = fechaNac;
+	}
+
+	public int getDiaNac() {
+		return DiaNac;
+	}
+
+	public void setDiaNac(int diaNac) {
+		DiaNac = diaNac;
+	}
+
+	public int getMesNac() {
+		return MesNac;
+	}
+
+	public void setMesNac(int mesNac) {
+		MesNac = mesNac;
+	}
+
+	public int getAnioNac() {
+		return AnioNac;
+	}
+
+	public void setAnioNac(int anioNac) {
+		AnioNac = anioNac;
 	}
 
 	public String getDireccion() {
@@ -125,10 +156,13 @@ public class Docente {
 
 	@Override
 	public String toString() {
-		return "Docente [ID=" + ID + ", Legajo=" + Legajo + ", Dni=" + Dni + ", Nombre=" + Nombre
-				+ ", Apellido=" + Apellido + ", FechaNac=" + FechaNac + ", Direccion=" + Direccion + ", Localidad="
-				+ Localidad + ", Nacionalidad=" + nacionalidad + ", Email=" + Email + ", Telefono=" + Telefono + "]";
+		return "Docente [ID=" + ID + ", Legajo=" + Legajo + ", Dni=" + Dni + ", Nombre=" + Nombre + ", Apellido="
+				+ Apellido + ", FechaNac=" + FechaNac + ", DiaNac=" + DiaNac + ", MesNac=" + MesNac + ", AnioNac="
+				+ AnioNac + ", Direccion=" + Direccion + ", Localidad=" + Localidad + ", nacionalidad=" + nacionalidad
+				+ ", Email=" + Email + ", Telefono=" + Telefono + "]";
 	}
+
+	
 	
 	
 }

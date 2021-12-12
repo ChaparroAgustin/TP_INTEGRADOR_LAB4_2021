@@ -11,7 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Entidades.Alumno;
+import Entidades.Localidad;
+import Entidades.Nacionalidad;
+import Entidades.Provincia;
 import Negocio.AlumnoNegocio;
+import Negocio.LocalidadNegocio;
+import Negocio.NacionalidadNegocio;
+import Negocio.ProvinciaNegocio;
 
 @WebServlet("/servletAlumnos")
 public class servletAlumnos extends HttpServlet {
@@ -25,11 +31,32 @@ public class servletAlumnos extends HttpServlet {
 		
 		if(request.getParameter("btnAgregar")!=null)
 		{
+			NacionalidadNegocio nacNeg = new NacionalidadNegocio();
+			ProvinciaNegocio provNeg = new ProvinciaNegocio();
+			
+			ArrayList<Nacionalidad> ListaNacionalidades = nacNeg.ListarNacionalidades();
+			ArrayList<Provincia> ListaProvincias = provNeg.ListarProvincias();
+			
+			request.getSession().setAttribute("ListaNacionalidadesSession", ListaNacionalidades);
+			request.getSession().setAttribute("ListaProvinciasSession", ListaProvincias);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("AgregarAlumno.jsp");
 			rd.forward(request, response);
 		}
 		if(request.getParameter("btnModificar")!=null)
 		{
+			NacionalidadNegocio nacNeg = new NacionalidadNegocio();
+			ProvinciaNegocio provNeg = new ProvinciaNegocio();
+			LocalidadNegocio locNeg = new LocalidadNegocio();
+			
+			ArrayList<Nacionalidad> ListaNacionalidades = nacNeg.ListarNacionalidades();
+			ArrayList<Provincia> ListaProvincias = provNeg.ListarProvincias();
+			ArrayList<Localidad> ListaLocalidades = locNeg.ListarLocalidades();
+			
+			request.getSession().setAttribute("ListaNacionalidadesSession", ListaNacionalidades);
+			request.getSession().setAttribute("ListaProvinciasSession", ListaProvincias);
+			request.getSession().setAttribute("ListaLocalidadesSession", ListaLocalidades);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("ModificarAlumno.jsp");
 			rd.forward(request, response);
 		}

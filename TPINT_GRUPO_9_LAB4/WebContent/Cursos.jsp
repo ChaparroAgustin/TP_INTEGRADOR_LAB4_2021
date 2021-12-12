@@ -25,7 +25,5 @@
 <br>
 <label style="margin-left: 38%;">Usuario Logueado: <b><%=session.getAttribute("usuarioLogueado") %></b></label>
 
-<label style="margin-left: 38%;">MateriaElegida: <b><%=session.getAttribute("codigoMateriaElegida") %></b></label>
-
 </body>
 </html>

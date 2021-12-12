@@ -11,7 +11,7 @@ public class ValidacionesNegocio {
 		//int MesActual = LocalDateTime.now().getMonthValue();
 		//int DiaActual = LocalDateTime.now().getDayOfMonth();
 		
-		if(Anio+18 > AnioActual || Mes < 1 || Mes > 12 || Dia < 1 || Dia > 31)
+		if(Anio+17 > AnioActual || Mes < 1 || Mes > 12 || Dia < 1 || Dia > 31)
 		{
 			fechaCorrecta = false;
 		}

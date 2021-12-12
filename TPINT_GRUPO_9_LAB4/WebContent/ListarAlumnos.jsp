@@ -49,8 +49,8 @@ pageEncoding="ISO-8859-1"%>
 		    <td align="center"><%=alumno.getNombre() + " " + alumno.getApellido()%></td>
 		    <td align="center"><%=alumno.getFechaNac() %></td>
 		    <td align="center"><%=alumno.getDireccion() %></td>
-		    <td align="center"><%=alumno.getNacionalidad().getDescripcion() %></td>
 		    <td align="center"><%=alumno.getProvincia().getDescripcion() %></td>
+		    <td align="center"><%=alumno.getNacionalidad().getDescripcion() %></td>
 		    <td align="center"><%=alumno.getEmail() %></td>
 		    <td align="center"><%=alumno.getTelefono() %></td>
 		</tr>
