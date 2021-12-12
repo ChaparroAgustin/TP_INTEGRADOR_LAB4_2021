@@ -64,7 +64,7 @@ public class DocenteDao {
 		Nacionalidad nac = new Nacionalidad();
 		Localidad loc = new Localidad();
 
-		String ListaFiltrada = "SELECT * FROM docentes where concat_ws(Legajo, Dni, Nombre, Apellido, "
+		String ListaFiltrada = "SELECT * FROM `vw-listar-docentes` where concat_ws(Legajo, Dni, Nombre, Apellido, "
 				+ "FechaNac, Direccion, Localidad, Nacionalidad, Email, Telefono) like '%"+text+"%'";
 		
 		try {

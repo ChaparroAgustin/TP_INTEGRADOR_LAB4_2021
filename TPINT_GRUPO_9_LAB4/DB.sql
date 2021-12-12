@@ -81,15 +81,6 @@ INSERT INTO materias(Codigo, Descripcion) VALUES('A002','Programación');
 INSERT INTO materias(Codigo, Descripcion) VALUES('A003','Informática');
 INSERT INTO materias(Codigo, Descripcion) VALUES('A004','Inglés');
 
-CREATE TABLE cursos (
-  ID int primary key not null auto_increment,
-  CodigoMateria varchar(10) not null,
-  Semestre varchar(7) check (Semestre = 'Primero' or Semestre = 'Segundo'),
-  Anio int,
-  IdDocente int,
-  CONSTRAINT FK_CodigoMateria FOREIGN KEY (CodigoMateria) REFERENCES materias (Codigo)
-);
-
 CREATE TABLE docentes (
   ID int primary key not null auto_increment,
   Legajo varchar(10) unique not null,
@@ -102,7 +93,7 @@ CREATE TABLE docentes (
   Nacionalidad int not null,
   Email varchar(100) not null,
   Telefono varchar(50) not null,
-  Estado bit not null default(1),
+  Estado bit not null default 1,
   CONSTRAINT FK_Nacionalidad FOREIGN KEY (Nacionalidad) REFERENCES Nacionalidades (ID),
   CONSTRAINT FK_Localidad FOREIGN KEY (Localidad) REFERENCES Localidades (ID)
 );
@@ -111,6 +102,15 @@ INSERT INTO docentes(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Localid
 VALUES ('1234','12345678','martita','maestra','1990-03-10','Rosario 1234',2,1,'martita123@yahoo.com.ar','12345678');
 INSERT INTO docentes(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Localidad, Nacionalidad, Email, Telefono)
 VALUES ('4321','87654321','pedrito','maestrito','1992-03-10','Newells 4321',5,1,'pedrito123@yahoo.com.ar','87654321');
+
+CREATE TABLE cursos (
+  ID int primary key not null auto_increment,
+  CodigoMateria varchar(10) not null,
+  Semestre varchar(7) check (Semestre = 'Primero' or Semestre = 'Segundo'),
+  Anio int,
+  IdDocente int,
+  CONSTRAINT FK_CodigoMateria FOREIGN KEY (CodigoMateria) REFERENCES materias (Codigo)
+);
 
 CREATE TABLE tiposusuario (
   ID int primary key not null auto_increment,
@@ -149,11 +149,6 @@ alumnos.Email AS Email,
 alumnos.Telefono AS Telefono, 
 alumnos.Estado AS Estado
 from alumnos;
-
-select * from alumnos;
-
-insert into tpintegrador.alumnos (Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
-values ('4444', '38346656', 'Juan Manuel', 'Gross', date_format('03-06-1994', "%d-%m-%Y"), 'Simon 2005', 1, 1, 'jmgross76@gmail.com', '1156073553');
 
 CREATE VIEW `vw-listar-docentes`
 AS
