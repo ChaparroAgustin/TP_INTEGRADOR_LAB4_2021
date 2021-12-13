@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +10,14 @@
 
 <center>
 <form action="servletInternoCursos" method="get" style="border: 1px solid #000000; width: 600px; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F" >
+	
+<%
+if(session.getAttribute("usuarioLogueado")==null)
+{
+	String redirectURL = "http://localhost:8080/Maquina_Virtual/Login.jsp";
+	response.sendRedirect(redirectURL);
+}
+%>
 	
 	<h1><b>Listar Cursos</b></h1>
 	<h5 align="left" style="padding-left: 195px; margin-bottom: -5px;">Filtro:</h5>
@@ -34,7 +42,7 @@
 	<input type="text" name="txtSemestre">
 	</th>
 	<th>
-	<center>Año</center>
+	<center>AÃ±o</center>
 	<input type="text" name="txtAnio">
 	</th>
 	</tr>

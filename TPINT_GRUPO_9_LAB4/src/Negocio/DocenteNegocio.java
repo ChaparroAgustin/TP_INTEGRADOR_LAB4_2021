@@ -63,4 +63,12 @@ public class DocenteNegocio {
 		
 		return coincidencia;
 	}
+	public int Baja(Docente d)
+	{
+		int bajado = 0;
+		
+		bajado = dDao.Baja(d);
+		
+		return bajado;
+	}
 }

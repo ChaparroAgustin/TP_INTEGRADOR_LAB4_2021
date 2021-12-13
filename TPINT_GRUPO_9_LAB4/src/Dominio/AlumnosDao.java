@@ -288,4 +288,28 @@ public class AlumnosDao {
 		return estado;
 	}
 	
+	public int Baja(Alumno a)
+	{
+		int estado = 0;
+		
+		CallableStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try
+		{
+			statement = conexion.prepareCall("update alumnos set "
+					+ "Estado = 0 "
+					+ "where ID = " + a.getID());
+			
+			statement.execute();
+			
+			estado = 1;
+			
+		}
+		catch (SQLException e) 
+		{											
+			estado = 0;
+		}
+		return estado;
+	}
+	
 }

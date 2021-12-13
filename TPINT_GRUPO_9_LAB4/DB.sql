@@ -59,6 +59,16 @@ INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provinci
 VALUES('2222','87654321','Pepa','Merengada','1992-03-10','calle verdadera 123',1,1,'pepa_merenga@yahoo.com.ar','87654321');
 INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
 VALUES('1111','12345678','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo@yahoo.com.ar','12345678');
+INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
+VALUES('3333','12345679','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo@yahoo.com.ar','12345678');
+INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
+VALUES('3334','12345680','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo@yahoo.com.ar','12345678');
+INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
+VALUES('3335','12345681','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo@yahoo.com.ar','12345678');
+INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
+VALUES('3336','12345682','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo@yahoo.com.ar','12345678');
+INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
+VALUES('3337','12345683','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo@yahoo.com.ar','12345678');
 
 CREATE TABLE alumnosxcurso (
   ID int primary key not null auto_increment,

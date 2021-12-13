@@ -280,4 +280,28 @@ public Docente Buscar(String text) {
 		return estado;
 	}
 	
+	public int Baja(Docente d)
+	{
+		int estado = 0;
+		
+		CallableStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try
+		{
+			statement = conexion.prepareCall("update docentes set "
+					+ "Estado= 0 "
+					+ "where ID = " + d.getID());
+			
+			statement.execute();
+			
+			estado = 1;
+			
+		}
+		catch (SQLException e) 
+		{											
+			estado = 0;
+		}
+		return estado;
+	}
+	
 }

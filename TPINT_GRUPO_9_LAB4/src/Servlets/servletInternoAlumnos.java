@@ -30,6 +30,70 @@ public class servletInternoAlumnos extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if(request.getParameter("btnBuscarBaja")!=null)
+		{
+			String mensaje;
+			
+			if(request.getParameter("txtFiltroBaja").length() == 0)
+			{
+				mensaje = "Filtro de búsqueda vacío.";
+				request.setAttribute("mensajeBajaAlumno", mensaje);
+			}
+			else
+			{
+				int coincidencia = 0;
+				AlumnoNegocio alumnoNeg = new AlumnoNegocio();
+				String filtroTexto = request.getParameter("txtFiltroBaja");
+				
+				coincidencia = alumnoNeg.Contar(filtroTexto);
+				
+				if(coincidencia != 1)
+				{
+					mensaje = "No se econtraron coincidencias exactas.";
+					request.setAttribute("mensajeBajaAlumno", mensaje);
+				}
+				else
+				{
+					Alumno alumno = new Alumno();
+					alumno = alumnoNeg.Buscar(filtroTexto);
+					
+					mensaje = "Se encontró un alumno.";
+					request.setAttribute("mensajeBajaAlumno", mensaje);
+					
+					request.getSession().setAttribute("AlumnoEncontradoBaja", alumno);
+				}
+			}
+			
+			RequestDispatcher rd = request.getRequestDispatcher("BajaAlumno.jsp");
+			rd.forward(request, response);
+		}
+		
+		if(request.getParameter("btnBaja")!=null)
+		{
+			String mensaje;
+			int bajado = 0;
+			
+			AlumnoNegocio aNeg = new AlumnoNegocio();
+			Alumno alumno = new Alumno();
+			alumno = (Alumno) request.getSession().getAttribute("AlumnoEncontradoBaja");
+			
+			bajado = aNeg.Baja(alumno);
+			
+			if(bajado == 1)
+			{
+				mensaje = "Alumno correctamente dado de baja.";
+				request.setAttribute("mensajeBajaAlumno", mensaje);
+			}
+			else if(bajado == 0)
+			{
+				mensaje = "No se pudo dar de baja el alumno.";
+				request.setAttribute("mensajeBajaAlumno", mensaje);
+			}
+			
+			RequestDispatcher rd = request.getRequestDispatcher("BajaAlumno.jsp");
+			rd.forward(request, response);
+		}
+		
 		if(request.getParameter("btnBuscar")!=null)
 		{
 			String mensaje;
@@ -261,7 +325,7 @@ public class servletInternoAlumnos extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("AgregarAlumno.jsp");
 			rd.forward(request, response);
 		}
-		if(request.getParameter("btnFiltrar")!=null)
+		/*if(request.getParameter("btnFiltrar")!=null)
 		{
 			String textoFiltro = request.getParameter("txtBuscado");
 			
@@ -272,7 +336,7 @@ public class servletInternoAlumnos extends HttpServlet {
 
 			RequestDispatcher rd = request.getRequestDispatcher("ListarAlumnos.jsp");
 			rd.forward(request, response);
-		}
+		}*/
 		
 		if(request.getParameter("btnVolver")!=null)
 		{

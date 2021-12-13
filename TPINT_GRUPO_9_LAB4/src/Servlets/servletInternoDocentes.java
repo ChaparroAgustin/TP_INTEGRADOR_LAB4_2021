@@ -32,6 +32,70 @@ public class servletInternoDocentes extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if(request.getParameter("btnBuscarBaja")!=null)
+		{
+			String mensaje;
+			
+			if(request.getParameter("txtFiltroBaja").length() == 0)
+			{
+				mensaje = "Filtro de búsqueda vacío.";
+				request.setAttribute("mensajeBajaDocente", mensaje);
+			}
+			else
+			{
+				int coincidencia = 0;
+				DocenteNegocio docenteNeg = new DocenteNegocio();
+				String filtroTexto = request.getParameter("txtFiltroBaja");
+				
+				coincidencia = docenteNeg.Contar(filtroTexto);
+				
+				if(coincidencia != 1)
+				{
+					mensaje = "No se econtraron coincidencias exactas.";
+					request.setAttribute("mensajeBajaDocente", mensaje);
+				}
+				else
+				{
+					Docente docente = new Docente();
+					docente = docenteNeg.Buscar(filtroTexto);
+					
+					mensaje = "Se encontró un docente.";
+					request.setAttribute("mensajeBajaDocente", mensaje);
+					
+					request.getSession().setAttribute("DocenteEncontradoBaja", docente);
+				}
+			}
+			
+			RequestDispatcher rd = request.getRequestDispatcher("BajaDocente.jsp");
+			rd.forward(request, response);
+		}
+		
+		if(request.getParameter("btnBaja")!=null)
+		{
+			String mensaje;
+			int bajado = 0;
+			
+			DocenteNegocio aNeg = new DocenteNegocio();
+			Docente docente = new Docente();
+			docente = (Docente) request.getSession().getAttribute("DocenteEncontradoBaja");
+			
+			bajado = aNeg.Baja(docente);
+			
+			if(bajado == 1)
+			{
+				mensaje = "Docente correctamente dado de baja.";
+				request.setAttribute("mensajeBajaDocente", mensaje);
+			}
+			else if(bajado == 0)
+			{
+				mensaje = "No se pudo dar de baja al docente.";
+				request.setAttribute("mensajeBajaDocente", mensaje);
+			}
+			
+			RequestDispatcher rd = request.getRequestDispatcher("BajaDocente.jsp");
+			rd.forward(request, response);
+		}
+		
 		if(request.getParameter("btnBuscar")!=null)
 		{
 			String mensaje;

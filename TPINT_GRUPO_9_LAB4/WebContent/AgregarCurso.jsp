@@ -16,6 +16,14 @@
 <center>
 <form action="servletInternoCursos" method="get" style="border: 1px solid #000000; width: 350px; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F" >
 	
+<%
+if(session.getAttribute("usuarioLogueado")==null)
+{
+	String redirectURL = "http://localhost:8080/Maquina_Virtual/Login.jsp";
+	response.sendRedirect(redirectURL);
+}
+%>
+	
 	<h1><b>Agregar Curso</b></h1>
 	<h5 style="margin-bottom: 2px;">Materia:</h5>
 	<select name="selectMateria" style="width: 144px;">		
@@ -25,13 +33,15 @@
 							{
 								listaMaterias = (List<Materia>) request.getAttribute("listaMaterias");
 							}
-				
+							
+							if(request.getAttribute("listaMaterias")!=null)
+							{
 	        				for(Materia m:listaMaterias)
 	        				{%>
 	        					<option value="<%=m.getCodigo() %>">
 	        						<%=m.getDescripcion() %>
 	        					</option>
-	        				<%} 
+	        				<%}} 
 	       				%>	
 	</select>
 	
@@ -53,13 +63,15 @@
 							{
 								listaAnios = (List<Integer>) request.getAttribute("listaAnios");
 							}
-				
+							
+							if(request.getAttribute("listaAnios")!=null)
+							{
 	        				for(Integer a:listaAnios)
 	        				{%>
 	        					<option value="<%=a %>">
 	        						<%=a %>
 	        					</option>
-	        				<%} 
+	        				<%}} 
 	       				%>		
 					</select>
 				</td>		
@@ -73,13 +85,15 @@
 							{
 								listaDocentes = (List<Docente>) request.getAttribute("listaDocentes");
 							}
-				
+							
+							if(request.getAttribute("listaDocentes")!=null)
+							{
 	        				for(Docente d:listaDocentes)
 	        				{%>
 	        					<option value="<%=d.getID() %>">
 	        						<%=d.getNombre() %>&nbsp;<%=d.getApellido() %>
 	        					</option>
-	        				<%} 
+	        				<%}}
 	       				%>		
 					</select>	
 		<br>

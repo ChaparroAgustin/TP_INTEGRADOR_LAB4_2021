@@ -15,6 +15,14 @@
 <center>
 <form action="servletInternoDocentes" method="get" style="border: 1px solid #000000; width: 350px; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F" >
 	
+<%
+if(session.getAttribute("usuarioLogueado")==null)
+{
+	String redirectURL = "http://localhost:8080/Maquina_Virtual/Login.jsp";
+	response.sendRedirect(redirectURL);
+}
+%>
+	
 	<h1><b>Modificar Docente</b></h1>
 	<h5 align="left" style="padding-left: 63px; margin-bottom: -5px;">Legajo / DNI:</h5>
 	<input type="text" name="txtFiltro">
@@ -134,7 +142,7 @@
 		</table>
 		
 		<br>
-		<input type="submit" name="btnConfirmar" value="Modificar" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
+		<input type="submit" name="btnConfirmar" value="Modificar" onClick="return confirm('¿Seguro que desea modificar al docente?');" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 	<%} %>	
 		<br>
 		<br>
