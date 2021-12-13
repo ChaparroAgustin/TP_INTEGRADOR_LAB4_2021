@@ -134,15 +134,15 @@ CREATE TABLE usuarios (
   ID int primary key not null auto_increment,
   usuario varchar(20) unique not null,
   pass varchar(20) not null,
-  tipo varchar(25) not null,
+  idTipo int not null,
   dni varchar(8) unique not null,
   nombre varchar(50) not null,
   apellido varchar(50) not null,
-  CONSTRAINT FK_tipo FOREIGN KEY (tipo) REFERENCES tiposusuario (Tipo)
+  CONSTRAINT FK_idTipo FOREIGN KEY (idTipo) REFERENCES tiposusuario (ID)
 );
 
-INSERT INTO usuarios(usuario, pass, tipo, dni, nombre, apellido) VALUES('admin','admin','Administrador','11111111','Gladys','Fernandez');
-INSERT INTO usuarios(usuario, pass, tipo, dni, nombre, apellido) VALUES('docente','docente','Docente','22222222','Tamara','Herrera');
+INSERT INTO usuarios(usuario, pass, idTipo, dni, nombre, apellido) VALUES('admin','admin',1,'11111111','Gladys','Fernandez');
+INSERT INTO usuarios(usuario, pass, idTipo, dni, nombre, apellido) VALUES('docente','docente',2,'22222222','Tamara','Herrera');
 
 CREATE VIEW `vw-alumnos` 
 AS 

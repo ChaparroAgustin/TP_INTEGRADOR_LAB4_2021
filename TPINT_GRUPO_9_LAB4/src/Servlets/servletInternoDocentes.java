@@ -256,39 +256,46 @@ public class servletInternoDocentes extends HttpServlet {
 			}
 			else
 			{
-				Docente docente = new Docente();
-				DocenteNegocio docenteNeg = new DocenteNegocio();
-				Nacionalidad nac = new Nacionalidad();
-				Localidad loc = new Localidad();
-				int Anio = Integer.parseInt(request.getParameter("txtAnioNacimiento"));
-				int Mes = Integer.parseInt(request.getParameter("txtMesNacimiento"));
-				int Dia = Integer.parseInt(request.getParameter("txtDiaNacimiento"));
-				
-				ValidacionesNegocio validar = new ValidacionesNegocio();
-				boolean fechaCorrecta = validar.validarFecha(Anio, Mes, Dia);
-				
-				if (fechaCorrecta == true)
+				if(request.getParameter("txtEmail").toString().contains("@") && request.getParameter("txtEmail").toString().contains(".com"))
 				{
-					String FechaNac = Anio + "-" + Mes + "-" + Dia;
+					Docente docente = new Docente();
+					DocenteNegocio docenteNeg = new DocenteNegocio();
+					Nacionalidad nac = new Nacionalidad();
+					Localidad loc = new Localidad();
+					int Anio = Integer.parseInt(request.getParameter("txtAnioNacimiento"));
+					int Mes = Integer.parseInt(request.getParameter("txtMesNacimiento"));
+					int Dia = Integer.parseInt(request.getParameter("txtDiaNacimiento"));
+					
+					ValidacionesNegocio validar = new ValidacionesNegocio();
+					boolean fechaCorrecta = validar.validarFecha(Anio, Mes, Dia);
+					
+					if (fechaCorrecta == true)
+					{
+						String FechaNac = Anio + "-" + Mes + "-" + Dia;
+					
+						docente.setLegajo(request.getParameter("txtLegajo"));
+						docente.setDni(request.getParameter("txtDni"));
+						docente.setNombre(request.getParameter("txtNombre"));
+						docente.setApellido(request.getParameter("txtApellido"));
+						docente.setFechaNac(FechaNac);
+						docente.setDireccion(request.getParameter("txtDireccion"));
+						nac.setID(Integer.parseInt(request.getParameter("selectNacionalidad")));
+						docente.setNacionalidad(nac);
+						loc.setID(Integer.parseInt(request.getParameter("selectLocalidad")));
+						docente.setLocalidad(loc);
+						docente.setEmail(request.getParameter("txtEmail"));
+						docente.setTelefono(request.getParameter("txtTelefono"));
 				
-					docente.setLegajo(request.getParameter("txtLegajo"));
-					docente.setDni(request.getParameter("txtDni"));
-					docente.setNombre(request.getParameter("txtNombre"));
-					docente.setApellido(request.getParameter("txtApellido"));
-					docente.setFechaNac(FechaNac);
-					docente.setDireccion(request.getParameter("txtDireccion"));
-					nac.setID(Integer.parseInt(request.getParameter("selectNacionalidad")));
-					docente.setNacionalidad(nac);
-					loc.setID(Integer.parseInt(request.getParameter("selectLocalidad")));
-					docente.setLocalidad(loc);
-					docente.setEmail(request.getParameter("txtEmail"));
-					docente.setTelefono(request.getParameter("txtTelefono"));
-			
-					estado = docenteNeg.AgregarDocente(docente);
+						estado = docenteNeg.AgregarDocente(docente);
+					}
+					else
+					{
+						estado = -2;
+					}
 				}
 				else
 				{
-					estado = -2;
+					estado = -3;
 				}
 			}
 			
@@ -312,6 +319,11 @@ public class servletInternoDocentes extends HttpServlet {
 			else if(estado == -2)
 			{
 				mensaje = "Fecha inválida.";
+				request.setAttribute("mensajeAgregarDocente", mensaje);
+			}
+			else if(estado == -3)
+			{
+				mensaje = "Mail inválido.";
 				request.setAttribute("mensajeAgregarDocente", mensaje);
 			}
 			

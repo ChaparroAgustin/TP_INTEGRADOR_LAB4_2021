@@ -39,6 +39,8 @@ public class servletLogin extends HttpServlet {
 		if(request.getParameter("btnLoguear")!=null)
 		{
 			LoginNegocio lneg = new LoginNegocio();
+			String user = request.getParameter("txtUsuario");
+			String pass = request.getParameter("txtClave");
 			
 			int estado = 0;
 			String mensaje = null;
@@ -50,9 +52,6 @@ public class servletLogin extends HttpServlet {
 			}
 			else
 			{
-				String user = request.getParameter("txtUsuario");
-				String pass = request.getParameter("txtClave");
-				
 				estado = lneg.comprobarLogin(user, pass);
 				
 				request.getSession().setAttribute("usuarioLogueado", user);
