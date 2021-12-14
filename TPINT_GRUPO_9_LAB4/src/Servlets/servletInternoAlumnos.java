@@ -161,6 +161,8 @@ public class servletInternoAlumnos extends HttpServlet {
 					}
 			else
 			{
+				
+				
 				Alumno alumno = new Alumno();
 				AlumnoNegocio aNeg = new AlumnoNegocio();
 				int confirmacion = 0;
@@ -176,33 +178,41 @@ public class servletInternoAlumnos extends HttpServlet {
 				
 				if (fechaCorrecta == true)
 				{
-					String FechaNac = Anio + "-" + Mes + "-" + Dia;
-					
-					alumno.setID(Integer.parseInt(request.getParameter("txtId")));
-					alumno.setLegajo(request.getParameter("txtLegajo"));
-					alumno.setDNI(request.getParameter("txtDni"));
-					alumno.setNombre(request.getParameter("txtNombre"));
-					alumno.setApellido(request.getParameter("txtApellido"));
-					alumno.setFechaNac(FechaNac);
-					alumno.setDireccion(request.getParameter("txtDireccion"));
-					nac.setID(Integer.parseInt(request.getParameter("selectNacionalidad")));
-					alumno.setNacionalidad(nac);
-					prov.setID(Integer.parseInt(request.getParameter("selectProvincia")));
-					alumno.setProvincia(prov);
-					alumno.setEmail(request.getParameter("txtEmail"));
-					alumno.setTelefono(request.getParameter("txtTelefono"));
-					
-					int cantidadDni = aNeg.ContarModificar(alumno.getDNI(), alumno.getID());
-					int cantidadLegajo = aNeg.ContarModificar(alumno.getLegajo(), alumno.getID());
-					
-					if(cantidadDni != 0 && cantidadLegajo != 0)
+					if(request.getParameter("txtEmail").toString().contains("@") && request.getParameter("txtEmail").toString().contains(".com"))
 					{
-						confirmacion = -3;
+						String FechaNac = Anio + "-" + Mes + "-" + Dia;
+						
+						alumno.setID(Integer.parseInt(request.getParameter("txtId")));
+						alumno.setLegajo(request.getParameter("txtLegajo"));
+						alumno.setDNI(request.getParameter("txtDni"));
+						alumno.setNombre(request.getParameter("txtNombre"));
+						alumno.setApellido(request.getParameter("txtApellido"));
+						alumno.setFechaNac(FechaNac);
+						alumno.setDireccion(request.getParameter("txtDireccion"));
+						nac.setID(Integer.parseInt(request.getParameter("selectNacionalidad")));
+						alumno.setNacionalidad(nac);
+						prov.setID(Integer.parseInt(request.getParameter("selectProvincia")));
+						alumno.setProvincia(prov);
+						alumno.setEmail(request.getParameter("txtEmail"));
+						alumno.setTelefono(request.getParameter("txtTelefono"));
+						
+						int cantidadDni = aNeg.ContarModificar(alumno.getDNI(), alumno.getID());
+						int cantidadLegajo = aNeg.ContarModificar(alumno.getLegajo(), alumno.getID());
+						
+						if(cantidadDni != 0 && cantidadLegajo != 0)
+						{
+							confirmacion = -3;
+						}
+						else
+						{
+							confirmacion = aNeg.Modificar(alumno);
+						}
 					}
 					else
 					{
-						confirmacion = aNeg.Modificar(alumno);
+						confirmacion = -4;
 					}
+					
 				}
 				else
 				{
@@ -227,6 +237,11 @@ public class servletInternoAlumnos extends HttpServlet {
 				else if(confirmacion == -3)
 				{
 					mensaje = "El DNI/Legajo ingresado ya existe.";
+					request.setAttribute("mensajeModificarAlumno", mensaje);
+				}
+				else if(confirmacion == -4)
+				{
+					mensaje = "Mail inválido.";
 					request.setAttribute("mensajeModificarAlumno", mensaje);
 				}
 			}

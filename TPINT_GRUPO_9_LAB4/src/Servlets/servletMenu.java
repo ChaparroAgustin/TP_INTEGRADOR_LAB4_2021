@@ -20,6 +20,11 @@ public class servletMenu extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if(request.getParameter("btnUsuarios")!=null)
+		{
+			RequestDispatcher rd = request.getRequestDispatcher("Usuarios.jsp");
+			rd.forward(request, response);
+		}
 		if(request.getParameter("btnAlumnos")!=null)
 		{
 			RequestDispatcher rd = request.getRequestDispatcher("Alumnos.jsp");

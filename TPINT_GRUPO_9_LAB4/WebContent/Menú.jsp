@@ -25,6 +25,8 @@ if(session.getAttribute("usuarioLogueado")==null)
 		<input type="submit" name="btnDocentes" value="Docentes" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 		<br><br>
 		<input type="submit" name="btnCursos" value="Cursos" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
+		<br><br>
+		<input type="submit" name="btnUsuarios" value="Usuarios" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 		<br><br><br>
 		<input type="submit" name="btnCerrarSesion" value="Cerrar sesión" onClick="return confirm('¿Seguro que desea cerrar la sesión en curso?');" Style="margin-left: 250px; border: 2px solid #000000; background-color: #e11e46; color: #FFFFFF; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 600; font-size: 13px; padding-top: 5px; padding-bottom: 5px; width: 103px;">
 </form>

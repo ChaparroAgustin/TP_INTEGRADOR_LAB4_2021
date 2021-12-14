@@ -117,6 +117,14 @@ if(session.getAttribute("usuarioLogueado")==null)
 				</td>
 			</tr>
 		</table>	
+		
+		<center>
+			<h5 style="margin-bottom: 2px;">Clave de acceso:</h5>
+			<input id="password" type="password" name="txtClave" maxlength="20">
+			<br>
+			<input type="checkbox" id="ver" class="ver" onChange="hideOrShowPassword()" style="margin-left: -24%; margin-top: 3px;" />
+    		<label class="text" style="font-size: 13px;">Mostrar</label>
+		</center>
 		<br>
 			<center>
 				<% 
@@ -175,6 +183,23 @@ function soloLetras(e) {
     }
     return true;
 }
+
+function hideOrShowPassword(){
+	  var password, check;
+
+	  password=document.getElementById("password");
+	  check=document.getElementById("ver");
+
+	  if(check.checked==true)
+	  {
+	      password.type = "text";
+	  }
+	  else // Si no está activada
+	  {
+	      password.type = "password";
+	  }
+	}
+
 </script>
 
 </body>

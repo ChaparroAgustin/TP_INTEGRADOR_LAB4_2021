@@ -60,36 +60,25 @@ VALUES('2222','87654321','Pepa','Merengada','1992-03-10','calle verdadera 123',1
 INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
 VALUES('1111','12345678','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo@yahoo.com.ar','12345678');
 INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
-VALUES('3333','12345679','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo@yahoo.com.ar','12345678');
+VALUES('3333','12345679','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo1@yahoo.com.ar','12345678');
 INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
-VALUES('3334','12345680','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo@yahoo.com.ar','12345678');
+VALUES('3334','12345680','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo2@yahoo.com.ar','12345678');
 INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
-VALUES('3335','12345681','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo@yahoo.com.ar','12345678');
+VALUES('3335','12345681','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo3@yahoo.com.ar','12345678');
 INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
-VALUES('3336','12345682','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo@yahoo.com.ar','12345678');
+VALUES('3336','12345682','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo4@yahoo.com.ar','12345678');
 INSERT INTO alumnos(Legajo, Dni, Nombre, Apellido, FechaNac, Direccion, Provincia, Nacionalidad, Email, Telefono)
-VALUES('3337','12345683','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo@yahoo.com.ar','12345678');
-
-CREATE TABLE alumnosxcurso (
-  ID int primary key not null auto_increment,
-  IdAlumno int not null,
-  NotaUno int null,
-  NotaDos int null,
-  NotaTres int null,
-  NotaCuatro int null,
-  CONSTRAINT FK_IdAlumno FOREIGN KEY (IdAlumno) REFERENCES alumnos (ID)
-);
+VALUES('3337','12345683','Pepito','Oreo','1990-03-10','calle falsa 123',1,1,'pepito_oreo5@yahoo.com.ar','12345678');
 
 CREATE TABLE materias (
   ID int primary key not null auto_increment,
-  Codigo varchar(10) unique not null,
   Descripcion varchar(50) unique not null
 );
 
-INSERT INTO materias(Codigo, Descripcion) VALUES('A001','Matemática');
-INSERT INTO materias(Codigo, Descripcion) VALUES('A002','Programación');
-INSERT INTO materias(Codigo, Descripcion) VALUES('A003','Informática');
-INSERT INTO materias(Codigo, Descripcion) VALUES('A004','Inglés');
+INSERT INTO materias(Descripcion) VALUES('Matemática');
+INSERT INTO materias(Descripcion) VALUES('Programación');
+INSERT INTO materias(Descripcion) VALUES('Informática');
+INSERT INTO materias(Descripcion) VALUES('Inglés');
 
 CREATE TABLE docentes (
   ID int primary key not null auto_increment,
@@ -115,11 +104,24 @@ VALUES ('4321','87654321','pedrito','maestrito','1992-03-10','Newells 4321',5,1,
 
 CREATE TABLE cursos (
   ID int primary key not null auto_increment,
-  CodigoMateria varchar(10) not null,
-  Semestre varchar(7) check (Semestre = 'Primero' or Semestre = 'Segundo'),
+  IdMateria int not null,
+  Semestre int check (Semestre = 1 or Semestre = 2),
   Anio int,
   IdDocente int,
-  CONSTRAINT FK_CodigoMateria FOREIGN KEY (CodigoMateria) REFERENCES materias (Codigo)
+  CONSTRAINT FK_IdMateria FOREIGN KEY (IdMateria) REFERENCES materias (ID),
+  CONSTRAINT FK_IdDocente FOREIGN KEY (IdDocente) REFERENCES docentes (ID)
+);
+
+CREATE TABLE alumnosxcurso (
+  ID int primary key not null auto_increment,
+  IdCurso int not null,
+  IdAlumno int not null,
+  NotaUno int null,
+  NotaDos int null,
+  NotaTres int null,
+  NotaCuatro int null,
+  CONSTRAINT FK_IdAlumno FOREIGN KEY (IdAlumno) REFERENCES alumnos (ID),
+  CONSTRAINT FK_IdCurso FOREIGN KEY (IdCurso) REFERENCES cursos (ID)
 );
 
 CREATE TABLE tiposusuario (
@@ -179,3 +181,38 @@ docentes.Email AS Email,
 docentes.Telefono AS Telefono,
 docentes.Estado AS Estado
 from docentes;
+
+CREATE VIEW `vw-usuarios`
+AS
+select usuarios.ID AS ID,
+usuarios.usuario AS usuario,
+usuarios.pass AS pass,
+usuarios.idTipo AS idTipo,
+(select Tipo from tiposusuario where ID = usuarios.idTipo) AS tipo,
+usuarios.dni AS dni,
+usuarios.nombre AS nombre,
+usuarios.apellido AS apellido
+from usuarios;
+
+DELIMITER $$
+create TRIGGER TR_ACTUALIZAR_USUARIO
+before update ON docentes
+FOR EACH ROW
+BEGIN
+	set @NombreDocente = new.Nombre;
+    set @ApellidoDocente = new.Apellido;
+    set @DniNuevoDocente = new.Dni;
+    set @DniActualDocente = old.Dni;
+    set @UsuarioActualDocente = (select concat(@DniActualDocente,'.frgp'));
+    set @UsuarioNuevoDocente = (select concat(@DniNuevoDocente,'.frgp'));
+    set @IdUsuario = (select ID from usuarios where usuario = @UsuarioActualDocente);
+    
+    update usuarios
+	set nombre = @NombreDocente,
+    apellido = @ApellidoDocente,
+    dni = @DniNuevoDocente,
+    usuario = @UsuarioNuevoDocente
+    where ID = @IdUsuario;
+    
+END$$
+DELIMITER ;

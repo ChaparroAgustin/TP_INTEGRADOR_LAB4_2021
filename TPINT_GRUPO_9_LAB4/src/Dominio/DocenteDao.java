@@ -275,7 +275,7 @@ public Docente Buscar(String text) {
 		}
 		catch (SQLException e) 
 		{											
-			estado = -3;
+			estado = -6;
 		}
 		return estado;
 	}

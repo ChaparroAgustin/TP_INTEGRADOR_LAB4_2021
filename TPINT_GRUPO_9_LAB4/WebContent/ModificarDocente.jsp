@@ -141,6 +141,14 @@ if(session.getAttribute("usuarioLogueado")==null)
 			</tr>
 		</table>
 		
+		<center>
+			<h5 style="margin-bottom: 2px;">Nueva clave de acceso:</h5>
+			<input id="password" type="password" name="txtClave" maxlength="20">
+			<br>
+			<input type="checkbox" id="ver" class="ver" onChange="hideOrShowPassword()" style="margin-left: -24%; margin-top: 3px;" />
+    		<label class="text" style="font-size: 13px;">Mostrar</label>
+		</center>
+		
 		<br>
 		<input type="submit" name="btnConfirmar" value="Modificar" onClick="return confirm('¿Seguro que desea modificar al docente?');" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 	<%} %>	
@@ -175,6 +183,24 @@ if(session.getAttribute("usuarioLogueado")==null)
 </center>
 <br>
 <label style="margin-left: 38%;">Usuario Logueado: <b><%=session.getAttribute("usuarioLogueado") %></b></label>
+
+<script>
+	function hideOrShowPassword(){
+	  	var password, check;
+
+	 	password=document.getElementById("password");
+	  	check=document.getElementById("ver");
+
+	  	if(check.checked==true)
+	  	{
+	      	password.type = "text";
+	  	}
+	  	else // Si no está activada
+	  	{
+	      	password.type = "password";
+	  	}
+	}
+</script>
 
 </body>
 </html>

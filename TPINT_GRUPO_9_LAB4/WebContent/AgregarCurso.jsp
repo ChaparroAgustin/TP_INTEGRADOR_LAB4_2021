@@ -50,8 +50,8 @@ if(session.getAttribute("usuarioLogueado")==null)
 				<td align="center">
 					<h5 style="margin-bottom: 2px;">Semestre:</h5>
 					<select name="selectSemestre" style="width: 144px;">		
-						<option value="primerSemestre">Primer semestre</option>
-						<option value="segundoSemestre">Segundo semestre</option>		
+						<option value="1">Primer semestre</option>
+						<option value="2">Segundo semestre</option>		
 					</select>
 				</td>	
 				<td align="center">
@@ -99,7 +99,7 @@ if(session.getAttribute("usuarioLogueado")==null)
 		<br>
 		<br>
 		<br>
-		<input type="submit" name="btnAgregarAlumnosCurso" value="Agregar Alumnos" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
+		<input type="submit" name="btnAgregarAlumnosCurso" value="Agregar Alumnos" OnClick="return confirm('¿Confirma los datos ingresados?');" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 		<br><br><br>
 		<input type="submit" name="btnVolver" value="Volver" style="border: 2px solid #797777; background-color: #F3E276; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px; margin-left: 80%;">
 	
