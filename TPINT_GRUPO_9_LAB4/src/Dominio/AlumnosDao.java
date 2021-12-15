@@ -35,9 +35,12 @@ public class AlumnosDao {
 			rs = st.executeQuery();
 			while(rs.next())
 			{
+				
 				Nacionalidad nac = new Nacionalidad();
 				Provincia prov = new Provincia();
 				Alumno alumno = new Alumno();
+				
+				alumno.setID(rs.getInt("ID"));
 				alumno.setLegajo(rs.getString("Legajo"));
 				alumno.setDNI(rs.getString("Dni"));
 				alumno.setNombre(rs.getString("Nombre"));

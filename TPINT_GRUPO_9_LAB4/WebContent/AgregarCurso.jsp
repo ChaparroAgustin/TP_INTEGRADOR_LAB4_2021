@@ -4,7 +4,7 @@
 <%@page import="Entidades.Docente" %>
 <%@page import="Entidades.Materia" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,7 +38,7 @@ if(session.getAttribute("usuarioLogueado")==null)
 							{
 	        				for(Materia m:listaMaterias)
 	        				{%>
-	        					<option value="<%=m.getCodigo() %>">
+	        					<option value="<%=m.getID() %>">
 	        						<%=m.getDescripcion() %>
 	        					</option>
 	        				<%}} 
@@ -55,7 +55,7 @@ if(session.getAttribute("usuarioLogueado")==null)
 					</select>
 				</td>	
 				<td align="center">
-					<h5 style="margin-bottom: 2px;">Año:</h5>
+					<h5 style="margin-bottom: 2px;">AÃ±o:</h5>
 					<select name="selectAnios" style="width: 144px;">		
 						<%
 							List<Integer> listaAnios = null;
@@ -99,7 +99,29 @@ if(session.getAttribute("usuarioLogueado")==null)
 		<br>
 		<br>
 		<br>
-		<input type="submit" name="btnAgregarAlumnosCurso" value="Agregar Alumnos" OnClick="return confirm('¿Confirma los datos ingresados?');" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
+		
+			<center>
+				<% 
+					if(request.getAttribute("mensajeCurso")!=null){ 
+						if(request.getAttribute("mensajeCurso")=="Curso y alumno/s agregados correctamente.")
+						{%>
+							<label Style="color: darkgreen; box-shadow: 0px 0px 10px 0px #000000; padding: 4px; background-color: #ffffff; border-radius: 15px;">
+								<b><%=request.getAttribute("mensajeCurso") %></b>
+							</label>
+						<%} 
+						else
+						{%>
+							<label Style="color: red; box-shadow: 0px 0px 10px 0px #000000; padding: 4px; background-color: #ffffff; border-radius: 15px;">
+								<b><%=request.getAttribute("mensajeCurso") %></b>
+							</label>
+						<%} %>
+						
+					<%}
+				%>
+			</center>
+		
+		<br><br>
+		<input type="submit" name="btnAgregarAlumnosCurso" value="Agregar Alumnos" OnClick="return confirm('Â¿Confirma los datos ingresados?');" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 		<br><br><br>
 		<input type="submit" name="btnVolver" value="Volver" style="border: 2px solid #797777; background-color: #F3E276; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px; margin-left: 80%;">
 	

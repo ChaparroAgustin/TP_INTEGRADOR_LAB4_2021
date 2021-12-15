@@ -233,7 +233,7 @@ public class servletInternoDocentes extends HttpServlet {
 				
 				if(confirmacion == 1 && confirmacion2 == 1)
 				{
-					mensaje = "Docente modificado correctamente.";
+					mensaje = "Docente y Usuario modificados correctamente.";
 					request.setAttribute("mensajeModificarDocente", mensaje);
 				}
 				else if(confirmacion == 0)
@@ -318,8 +318,6 @@ public class servletInternoDocentes extends HttpServlet {
 						docente.setEmail(request.getParameter("txtEmail"));
 						docente.setTelefono(request.getParameter("txtTelefono"));
 				
-						estado = docenteNeg.AgregarDocente(docente);
-						
 						String pass = request.getParameter("txtClave");
 						UsuarioNegocio uNeg = new UsuarioNegocio();
 						Usuario user = new Usuario();
@@ -332,6 +330,11 @@ public class servletInternoDocentes extends HttpServlet {
 						user.setApellido(docente.getApellido());
 						
 						estado2 = uNeg.asignarClave(user);
+						
+						if(estado2 == 1)
+						{
+							estado = docenteNeg.AgregarDocente(docente);
+						}
 					}
 					else
 					{
@@ -348,7 +351,12 @@ public class servletInternoDocentes extends HttpServlet {
 			
 			if(estado == 1 && estado2 == 1)
 			{
-				mensaje = "Docente agregado correctamente.";
+				mensaje = "Docente y Usuario agregados correctamente.";
+				request.setAttribute("mensajeAgregarDocente", mensaje);
+			}
+			else if(estado == 1 && estado2 == -1)
+			{
+				mensaje = "Docente agregado. Usuario no agregado (Legajo/DNI existente).";
 				request.setAttribute("mensajeAgregarDocente", mensaje);
 			}
 			else if(estado == 0)

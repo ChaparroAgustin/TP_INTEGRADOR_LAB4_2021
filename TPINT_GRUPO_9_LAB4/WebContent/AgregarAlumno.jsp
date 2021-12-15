@@ -2,7 +2,7 @@
 <%@page import="Entidades.Nacionalidad"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,7 +12,7 @@
 <body>
 
 <center>
-<form name="agregarAlumno" action="servletInternoAlumnos" method="get" style="border: 1px solid #000000; width: 350px; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F" >
+<form name="agregarAlumno" action="servletInternoAlumnos" method="get" style="border: 1px solid #000000; width: 500px; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F" >
 	
 <%
 if(session.getAttribute("usuarioLogueado")==null)
@@ -29,7 +29,7 @@ if(session.getAttribute("usuarioLogueado")==null)
 			<tr>
 				<td align="center">
 					<h5 style="margin-bottom: 2px;">Legajo:</h5>
-					<input type="text" name="txtLegajo" maxlength="10">
+					<input type="text" name="txtLegajo" maxlength="8">
 				</td>
 				<td align="center">
 					<h5 style="margin-bottom: 2px;">DNI:</h5>
@@ -57,7 +57,7 @@ if(session.getAttribute("usuarioLogueado")==null)
 					<input type="text" name="txtAnioNacimiento" maxlength="4" style="width: 35px; ">
 				</td>
 				<td align="center">
-					<h5 style="margin-bottom: 2px;">Dirección:</h5>
+					<h5 style="margin-bottom: 2px;">DirecciÃ³n:</h5>
 					<input type="text" name="txtDireccion" maxlength="100">
 				</td>
 			</tr>
@@ -113,7 +113,7 @@ if(session.getAttribute("usuarioLogueado")==null)
 					<input type="text" name="txtEmail" maxlength="100">
 				</td>
 				<td align="center">
-					<h5 style="margin-bottom: 2px;">Teléfono:</h5>
+					<h5 style="margin-bottom: 2px;">TelÃ©fono:</h5>
 					<input type="text" name="txtTelefono" maxlength="10">
 				</td>
 			</tr>
@@ -139,7 +139,7 @@ if(session.getAttribute("usuarioLogueado")==null)
 				%>
 			</center>
 		<br>
-		<input type="submit" name="btnAlta" value="Agregar" onClick="return confirm('¿Confirma que los datos ingresados son correctos?');" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
+		<input type="submit" name="btnAlta" value="Agregar" onClick="return confirm('Â¿Confirma que los datos ingresados son correctos?');" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 		<br><br><br>
 		<input type="submit" name="btnVolver" value="Volver" style="border: 2px solid #797777; background-color: #F3E276; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px; margin-left: 80%;">
 	

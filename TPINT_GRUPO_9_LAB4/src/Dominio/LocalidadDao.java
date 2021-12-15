@@ -17,7 +17,7 @@ public class LocalidadDao {
 		Connection conexion = Conexion.getConexion().getSQLConexion();		
 		
 		try {
-			st = conexion.prepareStatement("SELECT * FROM Localidades order by ID;");
+			st = conexion.prepareStatement("SELECT * FROM Localidades order by Descripcion asc;");
 			rs = st.executeQuery();
 			while(rs.next()) {
 				Localidad l = new Localidad();

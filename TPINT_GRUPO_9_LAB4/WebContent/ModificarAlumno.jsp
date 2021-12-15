@@ -3,7 +3,7 @@
 <%@page import="Entidades.Provincia" %>
 <%@page import="Entidades.Alumno" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,11 +25,11 @@ if(session.getAttribute("usuarioLogueado")==null)
 	
 	<h1><b>Modificar Alumno</b></h1>
 	<h5 align="left" style="padding-left: 63px; margin-bottom: -5px;">Legajo / DNI:</h5>
-	<input type="text" name="txtFiltro">
+	<input type="text" name="txtFiltro" maxlength="8">
 	<input type="submit" name="btnBuscar" value="Buscar" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 	
 	<%
-	if(request.getAttribute("mensajeModificarAlumno")=="Se encontró un alumno.")
+	if(request.getAttribute("mensajeModificarAlumno")=="Se encontrÃ³ un alumno.")
 	{
 		Alumno alumno = new Alumno();
 		
@@ -68,7 +68,7 @@ if(session.getAttribute("usuarioLogueado")==null)
 					<input type="text" name="txtAnioNacimiento" maxlength="4" style="width: 35px; " value="<%=alumno.getAnioNac()%>">
 				</td>
 				<td align="center">
-					<h5 style="margin-bottom: 2px;">Dirección:</h5>
+					<h5 style="margin-bottom: 2px;">DirecciÃ³n:</h5>
 					<input type="text" name="txtDireccion" value="<%=alumno.getDireccion()%>">
 				</td>
 			</tr>
@@ -136,21 +136,21 @@ if(session.getAttribute("usuarioLogueado")==null)
 					<input type="text" name="txtEmail" value="<%=alumno.getEmail()%>">
 				</td>
 				<td align="center">
-					<h5 style="margin-bottom: 2px;">Teléfono:</h5>
+					<h5 style="margin-bottom: 2px;">TelÃ©fono:</h5>
 					<input type="text" name="txtTelefono" value="<%=alumno.getTelefono()%>">
 				</td>
 			</tr>
 		</table>
 		
 		<br>
-		<input type="submit" name="btnConfirmar" value="Modificar" onClick="return confirm('¿Seguro que desea modificar al alumno?');" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
+		<input type="submit" name="btnConfirmar" value="Modificar" onClick="return confirm('Â¿Seguro que desea modificar al alumno?');" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 	<%} %>
 		<br>
 		<br>
 			<center>
 				<% 
 					if(request.getAttribute("mensajeModificarAlumno")!=null){
-						if(request.getAttribute("mensajeModificarAlumno")!="Se encontró un alumno.")
+						if(request.getAttribute("mensajeModificarAlumno")!="Se encontrÃ³ un alumno.")
 						{
 						if(request.getAttribute("mensajeModificarAlumno")=="Alumno modificado correctamente.")
 						{%>

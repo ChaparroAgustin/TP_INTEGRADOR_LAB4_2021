@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+pageEncoding="UTF-8"%>
 <%@page import ="Entidades.Alumno" %>
 <%@page import ="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -61,11 +61,11 @@ if(session.getAttribute("usuarioLogueado")==null)
             <th>DNI</th>
             <th>Nombre y Apellido</th>
             <th>Fecha de Nacimiento</th>
-            <th>Dirección</th>
+            <th>DirecciÃ³n</th>
             <th>Provincia</th>
             <th>Nacionalidad</th>
             <th>Email</th>
-            <th>Teléfono</th>
+            <th>TelÃ©fono</th>
         </tr>
     </thead>
     <tbody>  
@@ -114,7 +114,7 @@ if(session.getAttribute("usuarioLogueado")==null)
                     infoFiltered: "",
                     infoPostFix: "",
                     loadingRecords: "Cargando...",
-                    zeroRecords: "No se encontraron alumnos que coincidan con tu búsqueda",
+                    zeroRecords: "No se encontraron alumnos que coincidan con tu bÃºsqueda",
                     emptyTable: "No hay alumnos disponibles en el sistema.",
                     paginate: {
                         first: "Primero",

@@ -2,25 +2,25 @@ package Entidades;
 
 public class Materia {
 	
-	private String Codigo;
+	private int ID;
 	private String Descripcion;
 	
 	public Materia() {
 		
 	}
 
-	public Materia(String codigo, String descripcion) {
+	public Materia(int ID, String descripcion) {
 		super();
-		Codigo = codigo;
+		this.ID = ID;
 		Descripcion = descripcion;
 	}
 
-	public String getCodigo() {
-		return Codigo;
+	public int getID() {
+		return ID;
 	}
 
-	public void setCodigo(String codigo) {
-		Codigo = codigo;
+	public void setID(int ID) {
+		this.ID = ID;
 	}
 
 	public String getDescripcion() {
@@ -33,7 +33,7 @@ public class Materia {
 
 	@Override
 	public String toString() {
-		return "Materia [Codigo=" + Codigo + ", Descripcion=" + Descripcion + "]";
+		return "Materia [ID=" + ID + ", Descripcion=" + Descripcion + "]";
 	}
 	
 	

@@ -3,7 +3,7 @@
 <%@page import="Entidades.Localidad" %>
 <%@page import="Entidades.Docente" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,7 +13,7 @@
 <body>
 
 <center>
-<form action="servletInternoDocentes" method="get" style="border: 1px solid #000000; width: 350px; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F" >
+<form action="servletInternoDocentes" method="get" style="border: 1px solid #000000; width: 500px; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F" >
 	
 <%
 if(session.getAttribute("usuarioLogueado")==null)
@@ -24,11 +24,11 @@ if(session.getAttribute("usuarioLogueado")==null)
 %>
 	
 	<h1><b>Modificar Docente</b></h1>
-	<h5 align="left" style="padding-left: 63px; margin-bottom: -5px;">Legajo / DNI:</h5>
-	<input type="text" name="txtFiltro">
+	<h5 align="left" style="padding-left: 140px; margin-bottom: -5px;">Legajo / DNI:</h5>
+	<input type="text" name="txtFiltro" maxlength="8">
 	<input type="submit" name="btnBuscar" value="Buscar" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 	<%
-	if(request.getAttribute("mensajeModificarDocente")=="Se encontrÛ un docente.")
+	if(request.getAttribute("mensajeModificarDocente")=="Se encontr√≥ un docente.")
 	{
 		Docente docente = new Docente();
 		
@@ -67,7 +67,7 @@ if(session.getAttribute("usuarioLogueado")==null)
 					<input type="text" name="txtAnioNacimiento" maxlength="4" style="width: 35px; " value="<%=docente.getAnioNac()%>">
 				</td>
 				<td align="center">
-					<h5 style="margin-bottom: 2px;">DirecciÛn:</h5>
+					<h5 style="margin-bottom: 2px;">Direcci√≥n:</h5>
 					<input type="text" name="txtDireccion" value="<%=docente.getDireccion()%>">
 				</td>
 			</tr>
@@ -135,7 +135,7 @@ if(session.getAttribute("usuarioLogueado")==null)
 					<input type="text" name="txtEmail" value="<%=docente.getEmail()%>">
 				</td>
 				<td align="center">
-					<h5 style="margin-bottom: 2px;">TelÈfono:</h5>
+					<h5 style="margin-bottom: 2px;">Tel√©fono:</h5>
 					<input type="text" name="txtTelefono" value="<%=docente.getTelefono()%>">
 				</td>
 			</tr>
@@ -150,16 +150,16 @@ if(session.getAttribute("usuarioLogueado")==null)
 		</center>
 		
 		<br>
-		<input type="submit" name="btnConfirmar" value="Modificar" onClick="return confirm('øSeguro que desea modificar al docente?');" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
+		<input type="submit" name="btnConfirmar" value="Modificar" onClick="return confirm('¬øSeguro que desea modificar al docente?');" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 	<%} %>	
 		<br>
 		<br>
 		<center>
 				<% 
 					if(request.getAttribute("mensajeModificarDocente")!=null){
-						if(request.getAttribute("mensajeModificarDocente")!="Se encontrÛ un docente.")
+						if(request.getAttribute("mensajeModificarDocente")!="Se encontr√≥ un docente.")
 						{
-						if(request.getAttribute("mensajeModificarDocente")=="Docente modificado correctamente.")
+						if(request.getAttribute("mensajeModificarDocente")=="Docente y Usuario modificados correctamente.")
 						{%>
 							<label Style="color: darkgreen; box-shadow: 0px 0px 10px 0px #000000; padding: 4px; background-color: #ffffff; border-radius: 15px;">
 								<b><%=request.getAttribute("mensajeModificarDocente") %></b>
@@ -195,7 +195,7 @@ if(session.getAttribute("usuarioLogueado")==null)
 	  	{
 	      	password.type = "text";
 	  	}
-	  	else // Si no est· activada
+	  	else // Si no est√° activada
 	  	{
 	      	password.type = "password";
 	  	}

@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Entidades.Curso;
 import Entidades.Docente;
 import Entidades.Materia;
+import Negocio.CursoNegocio;
 import Negocio.DocenteNegocio;
 import Negocio.MateriaNegocio;
 
@@ -53,6 +55,11 @@ public class servletCursos extends HttpServlet {
 		}
 		if(request.getParameter("btnListar")!=null)
 		{
+			CursoNegocio cNeg = new CursoNegocio();
+			ArrayList<Curso> Lista = new ArrayList<Curso>();
+			Lista = cNeg.Listar();
+			request.getSession().setAttribute("listadoCursos", Lista);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("ListarCursos.jsp");
 			rd.forward(request, response);
 		}

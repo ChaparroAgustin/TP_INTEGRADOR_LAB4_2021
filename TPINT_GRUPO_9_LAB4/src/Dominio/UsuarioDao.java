@@ -46,11 +46,11 @@ public class UsuarioDao {
 		
 		int estado = 0;
 		
-		CallableStatement statement;
+		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		try
 		{
-			statement = conexion.prepareCall("insert into tpintegrador.usuarios (usuario, pass, idTipo, "
+			statement = conexion.prepareStatement("insert into tpintegrador.usuarios (usuario, pass, idTipo, "
 					+ "nombre, apellido, dni)"
 					+ "values('"
 					+ u.getUser() + "', '"

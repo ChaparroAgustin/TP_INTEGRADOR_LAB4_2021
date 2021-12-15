@@ -17,7 +17,7 @@ public class NacionalidadDao {
 		Connection conexion = Conexion.getConexion().getSQLConexion();		
 		
 		try {
-			st = conexion.prepareStatement("SELECT * FROM Nacionalidades order by ID;");
+			st = conexion.prepareStatement("SELECT * FROM Nacionalidades order by Descripcion asc;");
 			rs = st.executeQuery();
 			while(rs.next()) {
 				Nacionalidad n = new Nacionalidad();

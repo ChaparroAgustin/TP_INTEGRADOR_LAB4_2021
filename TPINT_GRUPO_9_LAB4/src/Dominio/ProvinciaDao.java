@@ -17,7 +17,7 @@ public class ProvinciaDao {
 		Connection conexion = Conexion.getConexion().getSQLConexion();		
 		
 		try {
-			st = conexion.prepareStatement("SELECT * FROM Provincias order by ID;");
+			st = conexion.prepareStatement("SELECT * FROM Provincias order by Descripcion asc;");
 			rs = st.executeQuery();
 			while(rs.next()) {
 				Provincia p = new Provincia();

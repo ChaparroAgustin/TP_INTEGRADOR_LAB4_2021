@@ -1,6 +1,6 @@
 <%@page import="Entidades.Docente" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,11 +22,11 @@ if(session.getAttribute("usuarioLogueado")==null)
 	
 	<h1><b>Baja Docente</b></h1>
 	<h5 align="left" style="padding-left: 63px; margin-bottom: -5px;">Legajo / DNI:</h5>
-	<input type="text" name="txtFiltroBaja">
+	<input type="text" name="txtFiltroBaja" maxlength="8">
 	<input type="submit" name="btnBuscarBaja" value="Buscar" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 	
 	<%
-	if(request.getAttribute("mensajeBajaDocente")=="Se encontró un docente.")
+	if(request.getAttribute("mensajeBajaDocente")=="Se encontrÃ³ un docente.")
 	{
 		Docente docente = new Docente();
 		
@@ -43,16 +43,14 @@ if(session.getAttribute("usuarioLogueado")==null)
 					<input type="text" name="txtDni" value="<%=docente.getDni()%>">
 				</td>		
 			</tr>
-			<tr>
-				<td align="center">
-					<h5 style="margin-bottom: 2px;">Nombres y Apellidos:</h5>
-					<input type="text" name="txtNomApe" value="<%=docente.getNombre()+" "+docente.getApellido()%>">
-				</td>
-			</tr>
-		</table>	
+		</table>
+			<center>
+				<h5 style="margin-bottom: 2px;">Nombres y Apellidos:</h5>
+				<input type="text" name="txtNomApe" value="<%=docente.getNombre()+" "+docente.getApellido()%>">
+			</center>
 		<br>
 		<br>
-		<input type="submit" name="btnBaja" value="Eliminar" onClick="return confirm('¿Seguro que desea eliminar al docente?');" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
+		<input type="submit" name="btnBaja" value="Eliminar" onClick="return confirm('Â¿Seguro que desea dar de baja al docente?');" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;">
 		<br>
 		<%} %>
 		<br>
@@ -61,7 +59,7 @@ if(session.getAttribute("usuarioLogueado")==null)
 		<center>
 				<% 
 					if(request.getAttribute("mensajeBajaDocente")!=null){
-						if(request.getAttribute("mensajeBajaDocente")!="Se encontró un docente.")
+						if(request.getAttribute("mensajeBajaDocente")!="Se encontrÃ³ un docente.")
 						{
 						if(request.getAttribute("mensajeBajaDocente")=="Docente correctamente dado de baja.")
 						{%>

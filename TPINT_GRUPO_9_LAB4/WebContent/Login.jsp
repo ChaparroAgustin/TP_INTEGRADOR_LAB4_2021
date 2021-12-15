@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,10 +13,10 @@
 
 	
 		<h3>Usuario:</h3>
-			<input type="text" name="txtUsuario">
+			<input type="text" name="txtUsuario" maxlength="13">
 	<br><br>
-		<h3>ContraseÒa:</h3>
-			<input id="password" type="password" name="txtClave">
+		<h3>Contrase√±a:</h3>
+			<input id="password" type="password" name="txtClave" maxlength="20">
 			<br>
 			<input type="checkbox" id="ver" class="ver" onChange="hideOrShowPassword()" style="margin-left: -24%; margin-top: 3px;" />
     		<label class="text" style="font-size: 13px;">Mostrar</label>
@@ -47,7 +47,7 @@ function hideOrShowPassword(){
 	  {
 	      password.type = "text";
 	  }
-	  else // Si no est· activada
+	  else // Si no est√° activada
 	  {
 	      password.type = "password";
 	  }

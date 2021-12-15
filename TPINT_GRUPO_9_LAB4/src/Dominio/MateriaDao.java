@@ -17,11 +17,11 @@ public class MateriaDao {
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		
 		try {
-			st = conexion.prepareStatement("SELECT Codigo, Descripcion FROM tpintegrador.Materias;");
+			st = conexion.prepareStatement("SELECT ID, Descripcion FROM tpintegrador.Materias order by Descripcion asc;");
 			rs = st.executeQuery();
 			while(rs.next()) {
 				Materia m = new Materia();
-				m.setCodigo(rs.getString("Codigo"));
+				m.setID(rs.getInt("ID"));
 				m.setDescripcion(rs.getString("Descripcion"));
 				materias.add(m);
 			}
