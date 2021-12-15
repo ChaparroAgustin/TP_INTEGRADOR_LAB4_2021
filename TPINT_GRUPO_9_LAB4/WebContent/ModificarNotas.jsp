@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="Entidades.Curso" %>
 <%@page import="Entidades.AlumnoPorCurso" %>
 <%@page import="java.util.ArrayList" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -29,7 +30,7 @@
 <body>
 
 <center>
-<form action="servletInternoCursos" method="get" style="border: 1px solid #000000; width: 60%; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F" >
+<form action="servletInternoCursos" method="get" style="border: 1px solid #000000; width: 70%; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F" >
 	
 <%
 if(session.getAttribute("usuarioLogueado")==null)
@@ -47,6 +48,24 @@ if(session.getAttribute("usuarioLogueado")==null)
 	<br><br>
 	
 	<%
+	Curso c = null;
+	if (session.getAttribute("CursoSeleccionado")!=null) 
+	{
+		c = (Curso)session.getAttribute("CursoSeleccionado");%>
+	
+			ID:&nbsp;<%=c.getID()%>
+			<br>
+		    Materia:&nbsp;<%=c.getMateria()%>
+		    <br>
+		    Semestre:&nbsp;<%=c.getSemestre()%>
+		    <br>
+		    Año:&nbsp;<%=c.getAnio()%>
+		    <br>
+		    Docente:&nbsp;<%=c.getDocente()%>
+		    <br><br><br>
+		    
+	
+	<%}
 	ArrayList<AlumnoPorCurso> Lista = null;
 	if (session.getAttribute("listadoAlumnosPorCursoID")!=null) 
 	{
@@ -58,10 +77,10 @@ if(session.getAttribute("usuarioLogueado")==null)
             <th>Legajo</th>
             <th>DNI</th>
             <th>Nombre y Apellido</th>
-            <th>Nota 1</th>
-            <th>Nota 2</th>
-            <th>Nota 3</th>
-            <th>Nota 4</th>
+            <th>1er Parcial</th>
+            <th>2do Parcial</th>
+            <th>1er Recup.</th>
+            <th>2do Recup.</th>
             <th>Estado</th>
         </tr>
     </thead>
@@ -74,25 +93,85 @@ if(session.getAttribute("usuarioLogueado")==null)
 		    <td align="center"><%=aPc.getDni()%></td>
 		    <td align="center"><%=aPc.getNombre() +" "+ aPc.getApellido()%></td>
 		    <td>
-		    	<input type="text" name="txtNota1" value="<%=aPc.getNota1() %>">
+		    	<center>
+		    		<select name="selectNota1" style="width: 50px; background-color: LightBlue; color: Black;">
+		    			<option <%if(aPc.getNota1()==0){ %>selected="true"<%} %> value="0">0</option>
+		    			<option <%if(aPc.getNota1()==1){ %>selected="true"<%} %> value="1">1</option>
+		    			<option <%if(aPc.getNota1()==2){ %>selected="true"<%} %> value="2">2</option>
+		    			<option <%if(aPc.getNota1()==3){ %>selected="true"<%} %> value="3">3</option>
+		    			<option <%if(aPc.getNota1()==4){ %>selected="true"<%} %> value="4">4</option>
+		    			<option <%if(aPc.getNota1()==5){ %>selected="true"<%} %> value="5">5</option>
+		    			<option <%if(aPc.getNota1()==6){ %>selected="true"<%} %> value="6">6</option>
+		    			<option <%if(aPc.getNota1()==7){ %>selected="true"<%} %> value="7">7</option>
+		    			<option <%if(aPc.getNota1()==8){ %>selected="true"<%} %> value="8">8</option>
+		    			<option <%if(aPc.getNota1()==9){ %>selected="true"<%} %> value="9">9</option>
+		    			<option <%if(aPc.getNota1()==10){ %>selected="true"<%} %> value="10">10</option>
+		    		</select>
+		    	</center>
 		    </td>
 		    <td>
-		    	<input type="text" name="txtNota1" value="<%=aPc.getNota2() %>">
+		    	<center>
+		    		<select name="selectNota2" style="width: 50px; background-color: LightBlue; color: Black;">
+		    			<option <%if(aPc.getNota2()==0){ %>selected="true"<%} %> value="0">0</option>
+		    			<option <%if(aPc.getNota2()==1){ %>selected="true"<%} %> value="1">1</option>
+		    			<option <%if(aPc.getNota2()==2){ %>selected="true"<%} %> value="2">2</option>
+		    			<option <%if(aPc.getNota2()==3){ %>selected="true"<%} %> value="3">3</option>
+		    			<option <%if(aPc.getNota2()==4){ %>selected="true"<%} %> value="4">4</option>
+		    			<option <%if(aPc.getNota2()==5){ %>selected="true"<%} %> value="5">5</option>
+		    			<option <%if(aPc.getNota2()==6){ %>selected="true"<%} %> value="6">6</option>
+		    			<option <%if(aPc.getNota2()==7){ %>selected="true"<%} %> value="7">7</option>
+		    			<option <%if(aPc.getNota2()==8){ %>selected="true"<%} %> value="8">8</option>
+		    			<option <%if(aPc.getNota2()==9){ %>selected="true"<%} %> value="9">9</option>
+		    			<option <%if(aPc.getNota2()==10){ %>selected="true"<%} %> value="10">10</option>
+		    		</select>
+		    	</center>
 		    </td>
 		    <td>
-		    	<input type="text" name="txtNota1" value="<%=aPc.getNota3() %>">
+		    	<center>
+		    		<select name="selectNota3" style="width: 50px; background-color: LightBlue; color: Black;">
+		    			<option <%if(aPc.getNota3()==0){ %>selected="true"<%} %> value="0">0</option>
+		    			<option <%if(aPc.getNota3()==1){ %>selected="true"<%} %> value="1">1</option>
+		    			<option <%if(aPc.getNota3()==2){ %>selected="true"<%} %> value="2">2</option>
+		    			<option <%if(aPc.getNota3()==3){ %>selected="true"<%} %> value="3">3</option>
+		    			<option <%if(aPc.getNota3()==4){ %>selected="true"<%} %> value="4">4</option>
+		    			<option <%if(aPc.getNota3()==5){ %>selected="true"<%} %> value="5">5</option>
+		    			<option <%if(aPc.getNota3()==6){ %>selected="true"<%} %> value="6">6</option>
+		    			<option <%if(aPc.getNota3()==7){ %>selected="true"<%} %> value="7">7</option>
+		    			<option <%if(aPc.getNota3()==8){ %>selected="true"<%} %> value="8">8</option>
+		    			<option <%if(aPc.getNota3()==9){ %>selected="true"<%} %> value="9">9</option>
+		    			<option <%if(aPc.getNota3()==10){ %>selected="true"<%} %> value="10">10</option>
+		    		</select>
+		    	</center>
 		    </td>
 		    <td>
-		    	<input type="text" name="txtNota1" value="<%=aPc.getNota4() %>">
+		    	<center>
+		    		<select name="selectNota4" style="width: 50px; background-color: LightBlue; color: Black;">
+		    			<option <%if(aPc.getNota4()==0){ %>selected="true"<%} %> value="0">0</option>
+		    			<option <%if(aPc.getNota4()==1){ %>selected="true"<%} %> value="1">1</option>
+		    			<option <%if(aPc.getNota4()==2){ %>selected="true"<%} %> value="2">2</option>
+		    			<option <%if(aPc.getNota4()==3){ %>selected="true"<%} %> value="3">3</option>
+		    			<option <%if(aPc.getNota4()==4){ %>selected="true"<%} %> value="4">4</option>
+		    			<option <%if(aPc.getNota4()==5){ %>selected="true"<%} %> value="5">5</option>
+		    			<option <%if(aPc.getNota4()==6){ %>selected="true"<%} %> value="6">6</option>
+		    			<option <%if(aPc.getNota4()==7){ %>selected="true"<%} %> value="7">7</option>
+		    			<option <%if(aPc.getNota4()==8){ %>selected="true"<%} %> value="8">8</option>
+		    			<option <%if(aPc.getNota4()==9){ %>selected="true"<%} %> value="9">9</option>
+		    			<option <%if(aPc.getNota4()==10){ %>selected="true"<%} %> value="10">10</option>
+		    		</select>
+		    	</center>
 		    </td>
 		    <td>
-		    	<select name="selectEstado" style="width: 144px;">
+		    	<center>
+		    	<select name="selectEstado" style="width: 100px; background-color: LightBlue; color: Black;">
 		    		<%if(aPc.getEstado() == 1){%>
         				<option selected="true" value="1">Regular</option>
-        			<%}else{ %>
         				<option value="0">Libre</option>
+        			<%}else{ %>
+        				<option value="1">Regular</option>
+        				<option selected="true" value="0">Libre</option>
         			<%} %>				
         		</select>
+        		</center>
 		    </td>
 		</tr>
 	</form>
@@ -107,6 +186,8 @@ if(session.getAttribute("usuarioLogueado")==null)
 		<%
 		}
 		%>
+		<br><br>
+		<input type="submit" name="btnCambiarNotasMasivo" value="Confirmar notas" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;" >
 		<br><br>
 		<input type="submit" name="btnVolverModificarNotas" value="Volver" style="border: 2px solid #797777; background-color: #F3E276; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px; margin-left: 80%;">
 	

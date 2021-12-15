@@ -56,6 +56,24 @@ public class servletInternoCursos extends HttpServlet {
 				
 				request.getSession().setAttribute("listadoAlumnosPorCursoID", ListApC);
 				
+				ArrayList<Curso> Lista = new ArrayList<Curso>();
+				Lista = cNeg.Listar();
+				Curso c = new Curso();
+				
+				for(Curso curso : Lista)
+				{
+					if(curso.getID() == IdCurso)
+					{
+						c.setID(curso.getID());
+						c.setMateria(curso.getMateria());
+						c.setDocente(curso.getDocente());
+						c.setSemestre(curso.getSemestre());
+						c.setAnio(curso.getAnio());
+					}
+				}
+				
+				request.getSession().setAttribute("CursoSeleccionado", c);
+				
 				RequestDispatcher rd = request.getRequestDispatcher("ModificarNotas.jsp");
 				rd.forward(request, response);
 			}

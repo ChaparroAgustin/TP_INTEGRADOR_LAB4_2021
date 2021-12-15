@@ -234,10 +234,10 @@ alumnosxcurso.IdAlumno AS IdAlumno,
 (select Dni from alumnos where ID = alumnosxcurso.IdAlumno) AS Dni,
 (select Nombre from alumnos where ID = alumnosxcurso.IdAlumno) AS Nombre,
 (select Apellido from alumnos where ID = alumnosxcurso.IdAlumno) AS Apellido,
-alumnosxcurso.Nota1 AS Nota1,
-alumnosxcurso.Nota2 AS Nota2,
-alumnosxcurso.Nota3 AS Nota3,
-alumnosxcurso.Nota4 AS Nota4,
+alumnosxcurso.NotaUno AS Nota1,
+alumnosxcurso.NotaDos AS Nota2,
+alumnosxcurso.NotaTres AS Nota3,
+alumnosxcurso.NotaCuatro AS Nota4,
 alumnosxcurso.Estado AS Estado
 from alumnosxcurso;
 
