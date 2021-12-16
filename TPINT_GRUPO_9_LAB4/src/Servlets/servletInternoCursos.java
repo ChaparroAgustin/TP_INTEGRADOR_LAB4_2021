@@ -37,7 +37,8 @@ public class servletInternoCursos extends HttpServlet {
 		{
 			CursoNegocio cNeg = new CursoNegocio();
 			ArrayList<Curso> Lista = new ArrayList<Curso>();
-			Lista = cNeg.Listar();
+			String user = request.getSession().getAttribute("usuarioLogueado").toString();
+			Lista = cNeg.ListarPorDocente(user);
 			request.getSession().setAttribute("listadoCursos", Lista);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("ListarCursos.jsp");
@@ -282,7 +283,10 @@ public class servletInternoCursos extends HttpServlet {
 				{
 					//si es asi, update de esa nota para ese id de alumnoxcurso
 					int nota = Integer.parseInt(request.getParameter(nota1));
-					cNeg.ActualizarNota("NotaUno", nota, IdAlumnoPorCurso);
+					if(nota>=0 && nota <=10)
+					{
+						cNeg.ActualizarNota("NotaUno", nota, IdAlumnoPorCurso);
+					}
 				}
 				
 				String nota2 = "txtNota2"+a.getID();
@@ -290,7 +294,10 @@ public class servletInternoCursos extends HttpServlet {
 				{
 					//si es asi, update de esa nota para ese id de alumnoxcurso
 					int nota = Integer.parseInt(request.getParameter(nota2));
-					cNeg.ActualizarNota("NotaDos", nota, IdAlumnoPorCurso);
+					if(nota>=0 && nota <=10)
+					{
+						cNeg.ActualizarNota("NotaDos", nota, IdAlumnoPorCurso);
+					}
 				}
 				
 				String nota3 = "txtNota3"+a.getID();
@@ -298,7 +305,10 @@ public class servletInternoCursos extends HttpServlet {
 				{
 					//si es asi, update de esa nota para ese id de alumnoxcurso
 					int nota = Integer.parseInt(request.getParameter(nota3));
-					cNeg.ActualizarNota("NotaTres", nota, IdAlumnoPorCurso);
+					if(nota>=0 && nota <=10)
+					{
+						cNeg.ActualizarNota("NotaTres", nota, IdAlumnoPorCurso);
+					}
 				}
 				
 				String nota4 = "txtNota4"+a.getID();
@@ -306,7 +316,10 @@ public class servletInternoCursos extends HttpServlet {
 				{
 					//si es asi, update de esa nota para ese id de alumnoxcurso
 					int nota = Integer.parseInt(request.getParameter(nota4));
-					cNeg.ActualizarNota("NotaCuatro", nota, IdAlumnoPorCurso);
+					if(nota>=0 && nota <=10)
+					{
+						cNeg.ActualizarNota("NotaCuatro", nota, IdAlumnoPorCurso);
+					}
 				}
 			}
 			
