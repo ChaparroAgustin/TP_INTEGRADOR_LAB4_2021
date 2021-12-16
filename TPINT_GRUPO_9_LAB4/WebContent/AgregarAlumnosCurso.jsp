@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js%22%3E"></script>
+
 <style>
 		th {
             text-align: center !important;
@@ -53,10 +55,10 @@ if(session.getAttribute("usuarioLogueado")==null)
 	<%
 		if(Lista!=null){
 	%>
-	<table id="tablax" border="1" border-color="black">
+	<table id="tablax" class="tabla-alumnos" border="1" border-color="black">
 	<thead align="center">
 		<tr style="background-color: #002060; color: #ffffff; text-shadow: #808080 1.5px 1px; padding: 1px;">
-			<th align="center"><input type="checkbox" name="chkTodos" value="Todos"></th>
+			<th align="center"><input id="select_all" type="checkbox" name="chkTodos" value="Todos"></th>
 			<th align="center">Legajo</th>
 			<th align="center">DNI</th>
 			<th align="center">Nombre y Apellido</th>
@@ -66,12 +68,10 @@ if(session.getAttribute("usuarioLogueado")==null)
 		<%
 			for(Alumno a : Lista){
 			session.setAttribute("listadoAlumnosCurso", Lista);
-			//int tamanioLista = Lista.size();
-			//session.setAttribute("tamanioListaAlumnosCurso", tamanioLista);
 		%>
 		<tr style="background-color: LightBlue; color: Black;">
 			<td align="center">
-				<input type="checkbox" name="chk<%=a.getID()%>" value="<%=a.getID()%>">
+				<input type="checkbox" class="checkbox" name="chk<%=a.getID()%>" value="<%=a.getID()%>">
 			</td>
 			<td align="center">
 				<%=a.getLegajo()%>
@@ -87,16 +87,6 @@ if(session.getAttribute("usuarioLogueado")==null)
 	</tbody>
 	</table>
 	<%} %>
-	
-	<%--
-	Materia Elegida: <%=session.getAttribute("codigoMateriaElegida") %>
-	<br>
-	Semestre Elegido: <%=session.getAttribute("codigoSemestreElegido") %>
-	<br>
-	Año Elegido: <%=session.getAttribute("codigoAnioElegido") %>
-	<br>
-	Docente Elegido: <%=session.getAttribute("codigoCodigoDocenteElegido") %>
-	--%>
 	
 	<br>
 	
@@ -129,6 +119,8 @@ if(session.getAttribute("usuarioLogueado")==null)
 </center>
 <br>
 <label style="margin-left: 38%;">Usuario Logueado: <b><%=session.getAttribute("usuarioLogueado") %></b></label>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js%22%3E"></script>
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
@@ -165,10 +157,34 @@ if(session.getAttribute("usuarioLogueado")==null)
                     }
                 },
                 scrollY: 200,
-                lengthMenu: [ [5], [5] ],
+                lengthMenu: [ [5, 10, 40,  -1], [5, 10, 40, "All"] ],
             });
         });
     </script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#select_all').on('click',function(){
+        if(this.checked){
+            $('.checkbox').each(function(){
+                this.checked = true;
+            });
+        }else{
+             $('.checkbox').each(function(){
+                this.checked = false;
+            });
+        }
+    });
+
+    $('.checkbox').on('click',function(){
+        if($('.checkbox:checked').length == $('.checkbox').length){
+            $('#select_all').prop('checked',true);
+        }else{
+            $('#select_all').prop('checked',false);
+        }
+    });
+});
+</script>
 
 </body>
 </html>

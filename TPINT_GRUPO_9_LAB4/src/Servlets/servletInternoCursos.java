@@ -21,6 +21,7 @@ import Negocio.AlumnoNegocio;
 import Negocio.CursoNegocio;
 import Negocio.DocenteNegocio;
 import Negocio.MateriaNegocio;
+import Negocio.ValidacionesNegocio;
 
 @WebServlet("/servletInternoCursos")
 public class servletInternoCursos extends HttpServlet {
@@ -45,19 +46,20 @@ public class servletInternoCursos extends HttpServlet {
 		
 		if(request.getParameter("btnModificarNotas")!=null)
 		{
-			if(request.getParameter("IdCurso")!=null)
+			if(request.getParameter("IdCursoSeleccionado")!=null)
 			{
-				int IdCurso = Integer.parseInt(request.getParameter("IdCurso"));
-				
+				int IdCurso = Integer.parseInt(request.getParameter("IdCursoSeleccionado"));
+			
 				ArrayList<AlumnoPorCurso> ListApC = new ArrayList<AlumnoPorCurso>();
-				CursoNegocio cNeg = new CursoNegocio();
 				
+				CursoNegocio cNeg = new CursoNegocio();
+				ArrayList<Curso> Lista = new ArrayList<Curso>();
+				
+				Lista = cNeg.Listar();
 				ListApC = cNeg.ListarAlumnosPorCurso(IdCurso);
 				
 				request.getSession().setAttribute("listadoAlumnosPorCursoID", ListApC);
 				
-				ArrayList<Curso> Lista = new ArrayList<Curso>();
-				Lista = cNeg.Listar();
 				Curso c = new Curso();
 				
 				for(Curso curso : Lista)
@@ -156,6 +158,25 @@ public class servletInternoCursos extends HttpServlet {
 				request.setAttribute("mensajeCurso", mensaje);
 			}
 			
+			List<Integer> listaAnios = new ArrayList<Integer>();
+			int principio = 2020;
+			int fin = LocalDateTime.now().getYear()+5;
+			while(principio <= fin)
+			{
+				listaAnios.add(principio);
+				principio++;
+			}
+			request.setAttribute("listaAnios", listaAnios);
+			
+			DocenteNegocio dNeg = new DocenteNegocio();
+			MateriaNegocio mNeg = new MateriaNegocio();
+			
+			List<Docente> listaDocentes = dNeg.listarDocentes(); 
+			request.setAttribute("listaDocentes", listaDocentes);
+			
+			List<Materia> listaMaterias = mNeg.listarMaterias();
+			request.setAttribute("listaMaterias", listaMaterias);
+			
 			RequestDispatcher rd = request.getRequestDispatcher("AgregarCurso.jsp");
 			rd.forward(request, response);
 		}
@@ -225,7 +246,7 @@ public class servletInternoCursos extends HttpServlet {
 				List<Docente> listaDocentes = dNeg.listarDocentes(); 
 				request.setAttribute("listaDocentes", listaDocentes);
 				
-				List<Materia> listaMaterias = mNeg.listarDocentes();
+				List<Materia> listaMaterias = mNeg.listarMaterias();
 				request.setAttribute("listaMaterias", listaMaterias);
 				
 				RequestDispatcher rd = request.getRequestDispatcher("AgregarCurso.jsp");
@@ -235,6 +256,82 @@ public class servletInternoCursos extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getParameter("btnCambiarNotasMasivo")!=null)
+		{
+			String mensaje;
+			
+			//actualizar notas masivamente.
+			//crear lista de alumnos
+			ArrayList<Alumno> listaAlumnos = new ArrayList<Alumno>();
+			AlumnoNegocio aNeg = new AlumnoNegocio();
+			listaAlumnos = aNeg.ListarAlumnos();
+			CursoNegocio cNeg = new CursoNegocio();
+			Curso curso = new Curso();
+			curso = (Curso) request.getSession().getAttribute("CursoSeleccionado");
+			
+			//recorrer la lista
+			for(Alumno a : listaAlumnos)
+			{
+				//en c/ vuelta obtener el id de ese alumnoxcurso (con id alumno y el id curso)
+				int IdAlumnoPorCurso = cNeg.BuscarIdPorAlumnoCurso(curso.getID(), a.getID());
+				
+				//en c/ vuelta preg. si la nota1+idalumno != null
+				String nota1 = "txtNota1"+a.getID();
+				if(request.getParameter(nota1)!=null && request.getParameter(nota1).length()!=0)
+				{
+					//si es asi, update de esa nota para ese id de alumnoxcurso
+					int nota = Integer.parseInt(request.getParameter(nota1));
+					cNeg.ActualizarNota("NotaUno", nota, IdAlumnoPorCurso);
+				}
+				
+				String nota2 = "txtNota2"+a.getID();
+				if(request.getParameter(nota2)!=null && request.getParameter(nota2).length()!=0)
+				{
+					//si es asi, update de esa nota para ese id de alumnoxcurso
+					int nota = Integer.parseInt(request.getParameter(nota2));
+					cNeg.ActualizarNota("NotaDos", nota, IdAlumnoPorCurso);
+				}
+				
+				String nota3 = "txtNota3"+a.getID();
+				if(request.getParameter(nota3)!=null && request.getParameter(nota3).length()!=0)
+				{
+					//si es asi, update de esa nota para ese id de alumnoxcurso
+					int nota = Integer.parseInt(request.getParameter(nota3));
+					cNeg.ActualizarNota("NotaTres", nota, IdAlumnoPorCurso);
+				}
+				
+				String nota4 = "txtNota4"+a.getID();
+				if(request.getParameter(nota4)!=null && request.getParameter(nota4).length()!=0)
+				{
+					//si es asi, update de esa nota para ese id de alumnoxcurso
+					int nota = Integer.parseInt(request.getParameter(nota4));
+					cNeg.ActualizarNota("NotaCuatro", nota, IdAlumnoPorCurso);
+				}
+			}
+			
+			//Cambio de estado según notas.
+			//armar listado de alumnosxcurso
+			ArrayList<AlumnoPorCurso> listaAlumnosPorCurso = new ArrayList<AlumnoPorCurso>();
+			listaAlumnosPorCurso = cNeg.ListarAlumnosPorCurso(curso.getID());
+			ValidacionesNegocio vNeg = new ValidacionesNegocio();
+			
+			//recorrer listado de alumnosxcurso
+			//hacer la telaraña de if y resolver
+			for(AlumnoPorCurso aPc : listaAlumnosPorCurso)
+			{
+				//estado = 0 (regular)
+				//estado = 1 (libre)
+				int estado = vNeg.ValidarEstadoNotasAlumnoPorCurso(aPc.getNota1(), aPc.getNota2(), aPc.getNota3(), aPc.getNota4());
+				cNeg.ActualizarEstadoAlumno(estado, aPc.getID());	
+			}
+			
+			mensaje = "Notas y estados de alumnos actualizados correctamente.";
+			request.setAttribute("mensajeCurso", mensaje);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("Cursos.jsp");
+			rd.forward(request, response);
+		}
 		
 		doGet(request, response);
 	}

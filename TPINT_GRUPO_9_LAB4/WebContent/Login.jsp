@@ -14,26 +14,33 @@
 	
 		<h3>Usuario:</h3>
 			<input type="text" name="txtUsuario" maxlength="13">
-	<br><br>
+		<br>
 		<h3>Contraseña:</h3>
 			<input id="password" type="password" name="txtClave" maxlength="20">
 			<br>
 			<input type="checkbox" id="ver" class="ver" onChange="hideOrShowPassword()" style="margin-left: -24%; margin-top: 3px;" />
     		<label class="text" style="font-size: 13px;">Mostrar</label>
+	<br>
+	
+	<% 
+	if(request.getAttribute("mensaje")!=null){ %>
+	
+		<br><br>
+		<center>
+			<label Style="color: red; box-shadow: 0px 0px 10px 0px #000000; padding: 4px; background-color: #ffffff; border-radius: 15px;">
+				<b>
+					<%=request.getAttribute("mensaje")%>
+				</b>
+			</label>
+		</center>
+	<%}
+%>
 	<br><br>
 		<input type="submit" name="btnLoguear" value="Ingresar" style="border: 2px solid #3C67E2; background-color: #20FFD0; box-shadow: 0px 0px 10px 0px #000000; border-radius: 15px; font-weight: 400; font-size: 18px; padding-top: 3px; padding-bottom: 3px;padding-inline: 3px;" >
 		
 
 </form>	
 </center>
-
-<% 
-	if(request.getAttribute("mensaje")!=null){ %>
-	
-		<br><br>
-		<%=request.getAttribute("mensaje") %>
-	<%}
-%>
 
 <script>
 

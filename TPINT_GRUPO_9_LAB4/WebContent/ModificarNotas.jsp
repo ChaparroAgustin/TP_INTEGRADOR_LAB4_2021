@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 
@@ -30,7 +31,7 @@
 <body>
 
 <center>
-<form action="servletInternoCursos" method="get" style="border: 1px solid #000000; width: 70%; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F" >
+<form action="servletInternoCursos" method="post" style="border: 1px solid #000000; width: 70%; border-radius: 15px; margin-top: 20px; box-shadow: 0px 0px 10px 0px #000000; padding: 15px; background-color: #A1EE9F" >
 	
 <%
 if(session.getAttribute("usuarioLogueado")==null)
@@ -87,89 +88,46 @@ if(session.getAttribute("usuarioLogueado")==null)
     <tbody>    	
 		
     		<%for(AlumnoPorCurso aPc : Lista){%>
-    <form action="servletInternoCursos" method="get">
+    <form action="servletInternoCursos" method="post">
 		<tr style="background-color: LightBlue; color: Black;">  
 		    <td align="center"><%=aPc.getLegajo()%></td>
 		    <td align="center"><%=aPc.getDni()%></td>
 		    <td align="center"><%=aPc.getNombre() +" "+ aPc.getApellido()%></td>
 		    <td>
 		    	<center>
-		    		<select name="selectNota1" style="width: 50px; background-color: LightBlue; color: Black;">
-		    			<option <%if(aPc.getNota1()==0){ %>selected="true"<%} %> value="0">0</option>
-		    			<option <%if(aPc.getNota1()==1){ %>selected="true"<%} %> value="1">1</option>
-		    			<option <%if(aPc.getNota1()==2){ %>selected="true"<%} %> value="2">2</option>
-		    			<option <%if(aPc.getNota1()==3){ %>selected="true"<%} %> value="3">3</option>
-		    			<option <%if(aPc.getNota1()==4){ %>selected="true"<%} %> value="4">4</option>
-		    			<option <%if(aPc.getNota1()==5){ %>selected="true"<%} %> value="5">5</option>
-		    			<option <%if(aPc.getNota1()==6){ %>selected="true"<%} %> value="6">6</option>
-		    			<option <%if(aPc.getNota1()==7){ %>selected="true"<%} %> value="7">7</option>
-		    			<option <%if(aPc.getNota1()==8){ %>selected="true"<%} %> value="8">8</option>
-		    			<option <%if(aPc.getNota1()==9){ %>selected="true"<%} %> value="9">9</option>
-		    			<option <%if(aPc.getNota1()==10){ %>selected="true"<%} %> value="10">10</option>
-		    		</select>
+		    		<input name="txtNota1<%=aPc.getIdAlumno()%>" maxlength="4" 
+		    		style="width: 50px; background-color: LightBlue; color: Black;"
+		    		value="<%=aPc.getNota1()%>">
 		    	</center>
 		    </td>
 		    <td>
 		    	<center>
-		    		<select name="selectNota2" style="width: 50px; background-color: LightBlue; color: Black;">
-		    			<option <%if(aPc.getNota2()==0){ %>selected="true"<%} %> value="0">0</option>
-		    			<option <%if(aPc.getNota2()==1){ %>selected="true"<%} %> value="1">1</option>
-		    			<option <%if(aPc.getNota2()==2){ %>selected="true"<%} %> value="2">2</option>
-		    			<option <%if(aPc.getNota2()==3){ %>selected="true"<%} %> value="3">3</option>
-		    			<option <%if(aPc.getNota2()==4){ %>selected="true"<%} %> value="4">4</option>
-		    			<option <%if(aPc.getNota2()==5){ %>selected="true"<%} %> value="5">5</option>
-		    			<option <%if(aPc.getNota2()==6){ %>selected="true"<%} %> value="6">6</option>
-		    			<option <%if(aPc.getNota2()==7){ %>selected="true"<%} %> value="7">7</option>
-		    			<option <%if(aPc.getNota2()==8){ %>selected="true"<%} %> value="8">8</option>
-		    			<option <%if(aPc.getNota2()==9){ %>selected="true"<%} %> value="9">9</option>
-		    			<option <%if(aPc.getNota2()==10){ %>selected="true"<%} %> value="10">10</option>
-		    		</select>
+		    		<input name="txtNota2<%=aPc.getIdAlumno()%>" maxlength="4" 
+		    		style="width: 50px; background-color: LightBlue; color: Black;"
+		    		value="<%=aPc.getNota2()%>">
 		    	</center>
 		    </td>
 		    <td>
 		    	<center>
-		    		<select name="selectNota3" style="width: 50px; background-color: LightBlue; color: Black;">
-		    			<option <%if(aPc.getNota3()==0){ %>selected="true"<%} %> value="0">0</option>
-		    			<option <%if(aPc.getNota3()==1){ %>selected="true"<%} %> value="1">1</option>
-		    			<option <%if(aPc.getNota3()==2){ %>selected="true"<%} %> value="2">2</option>
-		    			<option <%if(aPc.getNota3()==3){ %>selected="true"<%} %> value="3">3</option>
-		    			<option <%if(aPc.getNota3()==4){ %>selected="true"<%} %> value="4">4</option>
-		    			<option <%if(aPc.getNota3()==5){ %>selected="true"<%} %> value="5">5</option>
-		    			<option <%if(aPc.getNota3()==6){ %>selected="true"<%} %> value="6">6</option>
-		    			<option <%if(aPc.getNota3()==7){ %>selected="true"<%} %> value="7">7</option>
-		    			<option <%if(aPc.getNota3()==8){ %>selected="true"<%} %> value="8">8</option>
-		    			<option <%if(aPc.getNota3()==9){ %>selected="true"<%} %> value="9">9</option>
-		    			<option <%if(aPc.getNota3()==10){ %>selected="true"<%} %> value="10">10</option>
-		    		</select>
+		    		<input name="txtNota3<%=aPc.getIdAlumno()%>" maxlength="4" 
+		    		style="width: 50px; background-color: LightBlue; color: Black;"
+		    		value="<%=aPc.getNota3()%>">
 		    	</center>
 		    </td>
 		    <td>
 		    	<center>
-		    		<select name="selectNota4" style="width: 50px; background-color: LightBlue; color: Black;">
-		    			<option <%if(aPc.getNota4()==0){ %>selected="true"<%} %> value="0">0</option>
-		    			<option <%if(aPc.getNota4()==1){ %>selected="true"<%} %> value="1">1</option>
-		    			<option <%if(aPc.getNota4()==2){ %>selected="true"<%} %> value="2">2</option>
-		    			<option <%if(aPc.getNota4()==3){ %>selected="true"<%} %> value="3">3</option>
-		    			<option <%if(aPc.getNota4()==4){ %>selected="true"<%} %> value="4">4</option>
-		    			<option <%if(aPc.getNota4()==5){ %>selected="true"<%} %> value="5">5</option>
-		    			<option <%if(aPc.getNota4()==6){ %>selected="true"<%} %> value="6">6</option>
-		    			<option <%if(aPc.getNota4()==7){ %>selected="true"<%} %> value="7">7</option>
-		    			<option <%if(aPc.getNota4()==8){ %>selected="true"<%} %> value="8">8</option>
-		    			<option <%if(aPc.getNota4()==9){ %>selected="true"<%} %> value="9">9</option>
-		    			<option <%if(aPc.getNota4()==10){ %>selected="true"<%} %> value="10">10</option>
-		    		</select>
+		    		<input name="txtNota4<%=aPc.getIdAlumno()%>" maxlength="4" 
+		    		style="width: 50px; background-color: LightBlue; color: Black;"
+		    		value="<%=aPc.getNota4()%>">
 		    	</center>
 		    </td>
 		    <td>
 		    	<center>
 		    	<select name="selectEstado" style="width: 100px; background-color: LightBlue; color: Black;">
-		    		<%if(aPc.getEstado() == 1){%>
-        				<option selected="true" value="1">Regular</option>
-        				<option value="0">Libre</option>
-        			<%}else{ %>
-        				<option value="1">Regular</option>
-        				<option selected="true" value="0">Libre</option>
-        			<%} %>				
+		    		
+        				<option <%if(aPc.getEstado() == 0){%>selected="true"<%}%> value="0">Regular</option>
+        				<option <%if(aPc.getEstado() == 1){%>selected="true"<%}%> value="1">Libre</option>
+        					
         		</select>
         		</center>
 		    </td>

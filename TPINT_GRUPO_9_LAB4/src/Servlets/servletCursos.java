@@ -47,7 +47,7 @@ public class servletCursos extends HttpServlet {
 			List<Docente> listaDocentes = dNeg.listarDocentes(); 
 			request.setAttribute("listaDocentes", listaDocentes);
 			
-			List<Materia> listaMaterias = mNeg.listarDocentes();
+			List<Materia> listaMaterias = mNeg.listarMaterias();
 			request.setAttribute("listaMaterias", listaMaterias);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("AgregarCurso.jsp");
@@ -55,10 +55,21 @@ public class servletCursos extends HttpServlet {
 		}
 		if(request.getParameter("btnListar")!=null)
 		{
-			CursoNegocio cNeg = new CursoNegocio();
-			ArrayList<Curso> Lista = new ArrayList<Curso>();
-			Lista = cNeg.Listar();
-			request.getSession().setAttribute("listadoCursos", Lista);
+			if((request.getSession().getAttribute("tipoUsuarioLogueado").toString().compareTo("Administrador"))==0)
+			{
+				CursoNegocio cNeg = new CursoNegocio();
+				ArrayList<Curso> Lista = new ArrayList<Curso>();
+				Lista = cNeg.Listar();
+				request.getSession().setAttribute("listadoCursos", Lista);
+			}
+			else
+			{
+				CursoNegocio cNeg = new CursoNegocio();
+				String user = request.getSession().getAttribute("usuarioLogueado").toString();
+				ArrayList<Curso> Lista = new ArrayList<Curso>();
+				Lista = cNeg.ListarPorDocente(user);
+				request.getSession().setAttribute("listadoCursos", Lista);
+			}
 			
 			RequestDispatcher rd = request.getRequestDispatcher("ListarCursos.jsp");
 			rd.forward(request, response);

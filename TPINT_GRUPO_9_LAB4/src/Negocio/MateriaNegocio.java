@@ -9,7 +9,7 @@ public class MateriaNegocio {
 
 MateriaDao mDao = new MateriaDao();
 	
-	public ArrayList<Materia> listarDocentes() {
+	public ArrayList<Materia> listarMaterias() {
 		return (ArrayList<Materia>) mDao.listarMaterias();
 	}
 	

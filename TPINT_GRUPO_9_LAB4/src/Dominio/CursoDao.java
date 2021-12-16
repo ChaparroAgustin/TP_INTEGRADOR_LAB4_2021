@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Conexion.Conexion;
+import Entidades.Alumno;
 import Entidades.AlumnoPorCurso;
 import Entidades.Curso;
 
@@ -89,6 +90,28 @@ public class CursoDao {
 		return ID;
 	}
 	
+	public int BuscarIdPorAlumnoCurso(int IdCurso, int IdAlumno) {
+		
+		PreparedStatement st;
+		ResultSet rs;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		int ID = 0;
+
+		String Consulta = "select ID from alumnosxcurso where IdCurso = " + IdCurso + " and IdAlumno = " + IdAlumno;
+
+		try {
+			st = conexion.prepareStatement(Consulta);
+			rs = st.executeQuery();
+			while (rs.next()) {
+				ID = rs.getInt("ID");
+			}
+			//conexion.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ID;
+	}
+	
 	public int AgregarAlumnosCurso(int IdAlumno, int IdCurso)
 	{
 		int estado = 0;
@@ -145,6 +168,38 @@ public class CursoDao {
 		return Lista;
 	}
 	
+	public ArrayList<Curso> ListarPorDocente(String user) {
+		
+		PreparedStatement st;
+		ResultSet rs;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		ArrayList<Curso> Lista = new ArrayList<Curso>();
+		
+		String Consulta = "select * from `vw-cursos-por-docente` where IdDocente = " + 
+				"(select ID from docentes where Dni = (select Dni from usuarios where usuario = '" + user + "'));";
+
+		try {
+			st = conexion.prepareStatement(Consulta);
+			rs = st.executeQuery();
+			while (rs.next()) {
+				Curso c = new Curso();
+				
+				c.setID(rs.getInt("ID"));
+				c.setMateria(rs.getString("Materia"));
+				c.setSemestre(rs.getInt("Semestre"));
+				c.setAnio(rs.getInt("Anio"));
+				c.setDocente(rs.getString("Docente"));
+				
+				Lista.add(c);
+			}
+			//conexion.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return Lista;
+	}
+	
 	public ArrayList<AlumnoPorCurso> ListarAlumnosPorCurso(int IdCurso) {
 		
 		PreparedStatement st;
@@ -152,7 +207,7 @@ public class CursoDao {
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		ArrayList<AlumnoPorCurso> Lista = new ArrayList<AlumnoPorCurso>();
 		
-		String Consulta = "select * from `vw-alumnosxcurso` where IdCurso = " + IdCurso +" order by ID asc";
+		String Consulta = "select * from tpintegrador.`vw-alumnosxcurso` where IdCurso = " + IdCurso;
 
 		try {
 			st = conexion.prepareStatement(Consulta);
@@ -181,6 +236,50 @@ public class CursoDao {
 		}
 		
 		return Lista;
+	}
+	
+	public int ActualizarNota(String columna, int nota, int IdAlumnoPorCurso)
+	{
+		int estado = 0;
+		
+		CallableStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try
+		{
+			statement = conexion.prepareCall("update tpintegrador.alumnosxcurso set "
+					+ columna + " = " + nota + " "
+					+ "where ID = " + IdAlumnoPorCurso);
+			statement.execute();
+			
+			estado = 1;
+		}
+		catch (SQLException e) 
+		{											
+			estado = -1;
+		}
+		return estado;
+	}
+	
+	public int ActualizarEstadoAlumno(int estado, int IdAlumnoPorCurso)
+	{
+		int estadoActualizado = 0;
+		
+		CallableStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try
+		{
+			statement = conexion.prepareCall("update tpintegrador.alumnosxcurso set "
+					+ "Estado = " + estado + " "
+					+ "where ID = " + IdAlumnoPorCurso);
+			statement.execute();
+			
+			estadoActualizado = 1;
+		}
+		catch (SQLException e) 
+		{											
+			estadoActualizado = -1;
+		}
+		return estadoActualizado;
 	}
 	
 }

@@ -37,6 +37,15 @@ public class CursoNegocio {
 		return ID;
 	}
 	
+	public int BuscarIdPorAlumnoCurso(int IdCurso, int IdAlumno)
+	{
+		int ID = 0;
+		
+		ID = cDao.BuscarIdPorAlumnoCurso(IdCurso, IdAlumno);
+		
+		return ID;
+	}
+	
 	public int AgregarAlumnosCurso(int IdAlumno, int IdCurso)
 	{
 		int estado = 0;
@@ -63,4 +72,31 @@ public class CursoNegocio {
 		
 		return Lista;
 	}
+	
+	public int ActualizarNota(String columna, int nota, int IdAlumnoPorCurso)
+	{
+		int notaActualizada = 0;
+		
+		notaActualizada = cDao.ActualizarNota(columna, nota, IdAlumnoPorCurso);
+		
+		return notaActualizada;
+	}
+	
+	public int ActualizarEstadoAlumno(int estado, int IdAlumnoPorCurso)
+	{
+		int estadoActualizado = 0;
+		
+		estadoActualizado = cDao.ActualizarEstadoAlumno(estado, IdAlumnoPorCurso);
+		
+		return estadoActualizado;
+	}
+	
+	public ArrayList<Curso> ListarPorDocente(String user)
+	{
+		ArrayList<Curso> Lista = new ArrayList<Curso>();
+		
+		Lista = cDao.ListarPorDocente(user);
+		
+		return Lista;
+	} 
 }

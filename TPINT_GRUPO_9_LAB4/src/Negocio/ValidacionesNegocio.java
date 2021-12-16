@@ -83,4 +83,58 @@ public class ValidacionesNegocio {
 		return fechaCorrecta;
 	}
 	
+	public int ValidarEstadoNotasAlumnoPorCurso(int n1, int n2, int n3, int n4)
+	{
+		//n1 = parcial 1
+		//n2 = parcial 2
+		//n3 = recuperatorio 1
+		//n4 = recuperatorio 2
+		
+		int estado = 1; // 1 = libre | 0 = regular
+		
+		if(n1 > 6)
+		{
+			if(n2 > 6)
+			{
+				//estado regular (0);
+				estado = 0;
+			}
+			else if(n4 > 6)
+			{
+				//estado regular (0);
+				estado = 0;
+			}
+			else
+			{
+				//estado libre (1);
+				estado = 1;
+			}
+		}
+		else if(n3 > 6)
+		{
+			if(n2 > 6)
+			{
+				//estado regular (0);
+				estado = 0;
+			}
+			else if(n4 > 6)
+			{
+				//estado regular (0);
+				estado = 0;
+			}
+			else
+			{
+				//estado libre (1);
+				estado = 1;
+			}
+		}
+		else
+		{
+			//estado libre (1);
+			estado = 1;
+		}
+		
+		return estado;
+	}
+	
 }

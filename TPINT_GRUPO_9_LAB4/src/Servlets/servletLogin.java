@@ -53,12 +53,16 @@ public class servletLogin extends HttpServlet {
 			else
 			{
 				estado = lneg.comprobarLogin(user, pass);
-				
-				request.getSession().setAttribute("usuarioLogueado", user);
 			}
 			
 			if(estado == 1)
 			{
+				String tipoUser;
+				tipoUser = lneg.buscarTipoUsuario(user, pass);				
+				
+				request.getSession().setAttribute("tipoUsuarioLogueado", tipoUser);
+				request.getSession().setAttribute("usuarioLogueado", user);
+				
 				RequestDispatcher rd = request.getRequestDispatcher("Menú.jsp");
 				rd.forward(request, response);
 			}

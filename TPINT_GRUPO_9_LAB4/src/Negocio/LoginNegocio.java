@@ -14,4 +14,13 @@ public class LoginNegocio {
 		
 		return resultado;
 	}
+	
+	public String buscarTipoUsuario(String user, String pass)
+	{
+		String tipoUser;
+		
+		tipoUser = ldao.buscarTipoUsuario(user, pass);
+		
+		return tipoUser;
+	}
 }

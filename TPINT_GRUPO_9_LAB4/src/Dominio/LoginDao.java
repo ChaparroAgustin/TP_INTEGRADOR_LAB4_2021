@@ -35,4 +35,32 @@ public class LoginDao {
 		return cantidad;
 	}
 	
+	public String buscarTipoUsuario(String user, String pass) {
+		
+		
+		PreparedStatement st;
+		ResultSet rs;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		
+		String selectUserPass = "select (select Tipo from tiposusuario where ID = (select IdTipo from usuarios where "
+				+ "usuario = '" + user + "' and pass = '" + pass + "')) AS tipo";
+		
+		String tipoUser = "";
+		try
+		{
+			st = conexion.prepareStatement(selectUserPass);
+			rs = st.executeQuery();
+			
+			while(rs.next())
+			{
+				tipoUser = (rs.getString("tipo"));
+			}
+			
+		}catch (SQLException e) 
+		{
+			tipoUser = "-1";
+		}
+		return tipoUser;
+	}
+	
 }

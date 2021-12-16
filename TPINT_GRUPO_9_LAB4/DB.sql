@@ -134,17 +134,17 @@ CREATE TABLE alumnosxcurso (
   ID int primary key not null auto_increment,
   IdCurso int not null,
   IdAlumno int not null,
-  NotaUno int not null default 0,
-  NotaDos int not null default 0,
-  NotaTres int not null default 0,
-  NotaCuatro int not null default 0,
+  NotaUno float not null default 0,
+  NotaDos float not null default 0,
+  NotaTres float not null default 0,
+  NotaCuatro float not null default 0,
   Estado bit not null default 1,
   CONSTRAINT FK_IdAlumno FOREIGN KEY (IdAlumno) REFERENCES alumnos (ID),
   CONSTRAINT FK_IdCurso FOREIGN KEY (IdCurso) REFERENCES cursos (ID)
 );
 /*
-	Estados de alumnosxcurso: 1 - REGULAR
-							  0 - LIBRE
+	Estados de alumnosxcurso: 0 - REGULAR
+							  1 - LIBRE
 */
 
 CREATE TABLE tiposusuario (
@@ -240,6 +240,16 @@ alumnosxcurso.NotaTres AS Nota3,
 alumnosxcurso.NotaCuatro AS Nota4,
 alumnosxcurso.Estado AS Estado
 from alumnosxcurso;
+
+CREATE VIEW `vw-cursos-por-docente`
+AS
+select cursos.ID AS ID,
+cursos.IdDocente AS IdDocente,
+(select Descripcion from materias where ID = cursos.IdMateria) AS Materia,
+cursos.Semestre AS Semestre,
+cursos.Anio AS Anio,
+(select concat(Nombre,' ',Apellido) from docentes where ID = cursos.IdDocente) AS Docente
+from cursos;
 
 DELIMITER $$
 create TRIGGER TR_ACTUALIZAR_USUARIO
